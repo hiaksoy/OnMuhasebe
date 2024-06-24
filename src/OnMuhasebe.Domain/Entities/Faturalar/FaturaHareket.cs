@@ -15,14 +15,14 @@ public class FaturaHareket : FullAuditedEntity<Guid>
     public decimal KdvHaricTutar { get; set; }
     public decimal KdvTutar { get; set; }
     public decimal NetTutar { get; set; }
-    public string Aciklama { get; set; }
+    public string? Aciklama { get; set; }
 
     #region Navigation Properties
-    public Fatura Fatura { get; set; }
-    public Stok Stok { get; set; }
-    public Masraf Masraf { get; set; }
-    public Hizmet Hizmet { get; set; }
-    public Depo Depo { get; set; }
+    public Fatura? Fatura { get; set; }
+    public Stok? Stok { get; set; }
+    public Masraf? Masraf { get; set; }
+    public Hizmet? Hizmet { get; set; }
+    public Depo? Depo { get; set; }
 
     #endregion
 }

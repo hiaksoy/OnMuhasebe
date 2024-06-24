@@ -19,10 +19,1610 @@ namespace OnMuhasebe.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaHesaplar.BankaHesap", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<Guid>("BankaSubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("HesapNo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<byte>("HesapTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<string>("IbanNo")
+                        .HasMaxLength(26)
+                        .HasColumnType("VarChar");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankaSubeId");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.HasIndex("SubeId");
+
+                    b.ToTable("AppBankaHesaplar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaSubeler.BankaSube", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<Guid>("BankaId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankaId");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppBankaSubeler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Bankalar.Banka", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppBankalar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Birimler.Birim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppBirimler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Cariler.Cari", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Adres")
+                        .HasMaxLength(150)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("Telefon")
+                        .HasMaxLength(15)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("VergiDairesi")
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("VergiNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppCariler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Depolar.Depo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.HasIndex("SubeId");
+
+                    b.ToTable("AppDepolar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Donemler.Donem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.ToTable("AppDonemler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Faturalar.Fatura", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("BrutTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("CariId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<Guid>("DonemId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FaturaNo")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime>("FaturaTarihi")
+                        .HasColumnType("Date");
+
+                    b.Property<byte>("FaturaTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<int>("HareketSayisi")
+                        .HasColumnType("Int");
+
+                    b.Property<decimal>("IndirimTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<decimal>("KdvHaricTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<decimal>("KdvTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<decimal>("NetTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CariId");
+
+                    b.HasIndex("DonemId");
+
+                    b.HasIndex("FaturaNo");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.HasIndex("SubeId");
+
+                    b.ToTable("AppFaturalar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Faturalar.FaturaHareket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("BirimFiyat")
+                        .HasColumnType("Money");
+
+                    b.Property<decimal>("BrutTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<Guid?>("DepoId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("FaturaId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<byte>("HareketTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<Guid?>("HizmetId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<decimal>("IndirimTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<decimal>("KdvHaricTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<int>("KdvOrani")
+                        .HasColumnType("Int");
+
+                    b.Property<decimal>("KdvTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("MasrafId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<decimal>("Miktar")
+                        .HasColumnType("Money");
+
+                    b.Property<decimal>("NetTutar")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid?>("StokId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepoId");
+
+                    b.HasIndex("FaturaId");
+
+                    b.HasIndex("HizmetId");
+
+                    b.HasIndex("MasrafId");
+
+                    b.HasIndex("StokId");
+
+                    b.ToTable("AppFaturaHareketler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Hizmetler.Hizmet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Barkod")
+                        .HasMaxLength(128)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("BirimFiyat")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("BirimId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<int>("KdvOrani")
+                        .HasColumnType("Int");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BirimId");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppHizmetler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Kasalar.Kasa", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.HasIndex("SubeId");
+
+                    b.ToTable("AppKasalar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Makbuzlar.Makbuz", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<Guid?>("BankaHesapId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<decimal>("BankaToplam")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid?>("CariId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<decimal>("CekToplam")
+                        .HasColumnType("Money");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<Guid>("DonemId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<int>("HareketSayisi")
+                        .HasColumnType("Int");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<Guid?>("KasaId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("MakbuzNo")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("VarChar");
+
+                    b.Property<byte>("MakbuzTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<decimal>("NakitToplam")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<decimal>("PosToplam")
+                        .HasColumnType("Money");
+
+                    b.Property<decimal>("SenetToplam")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<DateTime>("Tarih")
+                        .HasColumnType("Date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankaHesapId");
+
+                    b.HasIndex("CariId");
+
+                    b.HasIndex("DonemId");
+
+                    b.HasIndex("KasaId");
+
+                    b.HasIndex("MakbuzNo");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.HasIndex("SubeId");
+
+                    b.ToTable("AppMakbuzlar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Makbuzlar.MakbuzHareket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("AsilBorclu")
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<Guid?>("BankaHesapId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<byte>("BelgeDurumu")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<string>("BelgeNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<Guid?>("CekBankaId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("CekBankaSubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("CekHesapNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ciranta")
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<Guid?>("KasaId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<bool>("KendiBelgemiz")
+                        .HasColumnType("Bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("MakbuzId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<byte>("OdemeTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<string>("TakipNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("Tutar")
+                        .HasColumnType("Money");
+
+                    b.Property<DateTime>("Vade")
+                        .HasColumnType("Date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankaHesapId");
+
+                    b.HasIndex("CekBankaId");
+
+                    b.HasIndex("CekBankaSubeId");
+
+                    b.HasIndex("KasaId");
+
+                    b.HasIndex("MakbuzId");
+
+                    b.HasIndex("TakipNo");
+
+                    b.ToTable("AppMakbuzHareketler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Masraflar.Masraf", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Barkod")
+                        .HasMaxLength(128)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("BirimFiyat")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("BirimId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<int>("KdvOrani")
+                        .HasColumnType("Int");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BirimId");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppMasraflar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.OzelKodlar.OzelKod", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<byte>("KartTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<byte>("KodTuru")
+                        .HasColumnType("TinyInt");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.ToTable("AppOzelKodlar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Parametreler.FirmaParametre", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DepoId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("DonemId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("SubeId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepoId");
+
+                    b.HasIndex("DonemId");
+
+                    b.HasIndex("SubeId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("AppFirmaParametreler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Stoklar.Stok", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Barkod")
+                        .HasMaxLength(128)
+                        .HasColumnType("VarChar");
+
+                    b.Property<decimal>("BirimFiyat")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("BirimId")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<int>("KdvOrani")
+                        .HasColumnType("Int");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("OzelKod1Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.Property<Guid?>("OzelKod2Id")
+                        .HasColumnType("UniqueIdentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BirimId");
+
+                    b.HasIndex("Kod");
+
+                    b.HasIndex("OzelKod1Id");
+
+                    b.HasIndex("OzelKod2Id");
+
+                    b.ToTable("AppStoklar", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Subeler.Sube", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(200)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VarChar");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<bool>("Durum")
+                        .HasColumnType("Bit");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VarChar");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Kod");
+
+                    b.ToTable("AppSubeler", (string)null);
+                });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {
@@ -1769,6 +3369,447 @@ namespace OnMuhasebe.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaHesaplar.BankaHesap", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.BankaSubeler.BankaSube", "BankaSube")
+                        .WithMany("BankaHesaplar")
+                        .HasForeignKey("BankaSubeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1BankaHesaplar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2BankaHesaplar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("BankaHesaplar")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BankaSube");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+
+                    b.Navigation("Sube");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaSubeler.BankaSube", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Bankalar.Banka", "Banka")
+                        .WithMany("BankaSubeler")
+                        .HasForeignKey("BankaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1BankaSubeler")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2BankaSubeler")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Banka");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Bankalar.Banka", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Bankalar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Bankalar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Birimler.Birim", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Birimler")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Birimler")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Cariler.Cari", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Cariler")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Cariler")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Depolar.Depo", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Depolar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Depolar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("Depolar")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+
+                    b.Navigation("Sube");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Faturalar.Fatura", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Cariler.Cari", "Cari")
+                        .WithMany("Faturalar")
+                        .HasForeignKey("CariId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.Donemler.Donem", "Donem")
+                        .WithMany("Faturalar")
+                        .HasForeignKey("DonemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Faturalar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Faturalar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("Faturalar")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Cari");
+
+                    b.Navigation("Donem");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+
+                    b.Navigation("Sube");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Faturalar.FaturaHareket", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Depolar.Depo", "Depo")
+                        .WithMany("FaturaHareketler")
+                        .HasForeignKey("DepoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Faturalar.Fatura", "Fatura")
+                        .WithMany("FaturaHareketler")
+                        .HasForeignKey("FaturaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.Hizmetler.Hizmet", "Hizmet")
+                        .WithMany("FaturaHareketler")
+                        .HasForeignKey("HizmetId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Masraflar.Masraf", "Masraf")
+                        .WithMany("FaturaHareketler")
+                        .HasForeignKey("MasrafId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Stoklar.Stok", "Stok")
+                        .WithMany("FaturaHareketler")
+                        .HasForeignKey("StokId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Depo");
+
+                    b.Navigation("Fatura");
+
+                    b.Navigation("Hizmet");
+
+                    b.Navigation("Masraf");
+
+                    b.Navigation("Stok");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Hizmetler.Hizmet", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Birimler.Birim", "Birim")
+                        .WithMany("Hizmetler")
+                        .HasForeignKey("BirimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Hizmetler")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Hizmetler")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Birim");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Kasalar.Kasa", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Kasalar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Kasalar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("Kasalar")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+
+                    b.Navigation("Sube");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Makbuzlar.Makbuz", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.BankaHesaplar.BankaHesap", "BankaHesap")
+                        .WithMany("Makbuzlar")
+                        .HasForeignKey("BankaHesapId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Cariler.Cari", "Cari")
+                        .WithMany("Makbuzlar")
+                        .HasForeignKey("CariId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Donemler.Donem", "Donem")
+                        .WithMany("Makbuzlar")
+                        .HasForeignKey("DonemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.Kasalar.Kasa", "Kasa")
+                        .WithMany("Makbuzlar")
+                        .HasForeignKey("KasaId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Makbuzlar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Makbuzlar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("Makbuzlar")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BankaHesap");
+
+                    b.Navigation("Cari");
+
+                    b.Navigation("Donem");
+
+                    b.Navigation("Kasa");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+
+                    b.Navigation("Sube");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Makbuzlar.MakbuzHareket", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.BankaHesaplar.BankaHesap", "BankaHesap")
+                        .WithMany("MakbuzHareketler")
+                        .HasForeignKey("BankaHesapId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Bankalar.Banka", "CekBanka")
+                        .WithMany("MakbuzHareketler")
+                        .HasForeignKey("CekBankaId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.BankaSubeler.BankaSube", "CekBankaSube")
+                        .WithMany("MakbuzHareketler")
+                        .HasForeignKey("CekBankaSubeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Kasalar.Kasa", "Kasa")
+                        .WithMany("MakbuzHareketler")
+                        .HasForeignKey("KasaId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Makbuzlar.Makbuz", "Makbuz")
+                        .WithMany("MakbuzHareketler")
+                        .HasForeignKey("MakbuzId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BankaHesap");
+
+                    b.Navigation("CekBanka");
+
+                    b.Navigation("CekBankaSube");
+
+                    b.Navigation("Kasa");
+
+                    b.Navigation("Makbuz");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Masraflar.Masraf", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Birimler.Birim", "Birim")
+                        .WithMany("Masraflar")
+                        .HasForeignKey("BirimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Masraflar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Masraflar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Birim");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Parametreler.FirmaParametre", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Depolar.Depo", "Depo")
+                        .WithMany("FirmaParemetreler")
+                        .HasForeignKey("DepoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.Donemler.Donem", "Donem")
+                        .WithMany("FirmaParemetreler")
+                        .HasForeignKey("DonemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.Subeler.Sube", "Sube")
+                        .WithMany("FirmaParemetreler")
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", "User")
+                        .WithOne()
+                        .HasForeignKey("OnMuhasebe.Entities.Parametreler.FirmaParametre", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Depo");
+
+                    b.Navigation("Donem");
+
+                    b.Navigation("Sube");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Stoklar.Stok", b =>
+                {
+                    b.HasOne("OnMuhasebe.Entities.Birimler.Birim", "Birim")
+                        .WithMany("Stoklar")
+                        .HasForeignKey("BirimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod1")
+                        .WithMany("OzelKod1Stoklar")
+                        .HasForeignKey("OzelKod1Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("OnMuhasebe.Entities.OzelKodlar.OzelKod", "OzelKod2")
+                        .WithMany("OzelKod2Stoklar")
+                        .HasForeignKey("OzelKod2Id")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Birim");
+
+                    b.Navigation("OzelKod1");
+
+                    b.Navigation("OzelKod2");
+                });
+
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
                 {
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
@@ -1909,6 +3950,157 @@ namespace OnMuhasebe.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaHesaplar.BankaHesap", b =>
+                {
+                    b.Navigation("MakbuzHareketler");
+
+                    b.Navigation("Makbuzlar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.BankaSubeler.BankaSube", b =>
+                {
+                    b.Navigation("BankaHesaplar");
+
+                    b.Navigation("MakbuzHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Bankalar.Banka", b =>
+                {
+                    b.Navigation("BankaSubeler");
+
+                    b.Navigation("MakbuzHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Birimler.Birim", b =>
+                {
+                    b.Navigation("Hizmetler");
+
+                    b.Navigation("Masraflar");
+
+                    b.Navigation("Stoklar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Cariler.Cari", b =>
+                {
+                    b.Navigation("Faturalar");
+
+                    b.Navigation("Makbuzlar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Depolar.Depo", b =>
+                {
+                    b.Navigation("FaturaHareketler");
+
+                    b.Navigation("FirmaParemetreler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Donemler.Donem", b =>
+                {
+                    b.Navigation("Faturalar");
+
+                    b.Navigation("FirmaParemetreler");
+
+                    b.Navigation("Makbuzlar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Faturalar.Fatura", b =>
+                {
+                    b.Navigation("FaturaHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Hizmetler.Hizmet", b =>
+                {
+                    b.Navigation("FaturaHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Kasalar.Kasa", b =>
+                {
+                    b.Navigation("MakbuzHareketler");
+
+                    b.Navigation("Makbuzlar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Makbuzlar.Makbuz", b =>
+                {
+                    b.Navigation("MakbuzHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Masraflar.Masraf", b =>
+                {
+                    b.Navigation("FaturaHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.OzelKodlar.OzelKod", b =>
+                {
+                    b.Navigation("OzelKod1BankaHesaplar");
+
+                    b.Navigation("OzelKod1BankaSubeler");
+
+                    b.Navigation("OzelKod1Bankalar");
+
+                    b.Navigation("OzelKod1Birimler");
+
+                    b.Navigation("OzelKod1Cariler");
+
+                    b.Navigation("OzelKod1Depolar");
+
+                    b.Navigation("OzelKod1Faturalar");
+
+                    b.Navigation("OzelKod1Hizmetler");
+
+                    b.Navigation("OzelKod1Kasalar");
+
+                    b.Navigation("OzelKod1Makbuzlar");
+
+                    b.Navigation("OzelKod1Masraflar");
+
+                    b.Navigation("OzelKod1Stoklar");
+
+                    b.Navigation("OzelKod2BankaHesaplar");
+
+                    b.Navigation("OzelKod2BankaSubeler");
+
+                    b.Navigation("OzelKod2Bankalar");
+
+                    b.Navigation("OzelKod2Birimler");
+
+                    b.Navigation("OzelKod2Cariler");
+
+                    b.Navigation("OzelKod2Depolar");
+
+                    b.Navigation("OzelKod2Faturalar");
+
+                    b.Navigation("OzelKod2Hizmetler");
+
+                    b.Navigation("OzelKod2Kasalar");
+
+                    b.Navigation("OzelKod2Makbuzlar");
+
+                    b.Navigation("OzelKod2Masraflar");
+
+                    b.Navigation("OzelKod2Stoklar");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Stoklar.Stok", b =>
+                {
+                    b.Navigation("FaturaHareketler");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Entities.Subeler.Sube", b =>
+                {
+                    b.Navigation("BankaHesaplar");
+
+                    b.Navigation("Depolar");
+
+                    b.Navigation("Faturalar");
+
+                    b.Navigation("FirmaParemetreler");
+
+                    b.Navigation("Kasalar");
+
+                    b.Navigation("Makbuzlar");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

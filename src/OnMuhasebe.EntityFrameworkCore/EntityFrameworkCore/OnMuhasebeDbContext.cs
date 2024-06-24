@@ -1,38 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnMuhasebe.Consts;
-using OnMuhasebe.Entities.BankaHesaplar;
-using OnMuhasebe.Entities.Bankalar;
-using OnMuhasebe.Entities.BankaSubeler;
-using OnMuhasebe.Entities.Birimler;
-using OnMuhasebe.Entities.Cariler;
-using OnMuhasebe.Entities.Depolar;
-using OnMuhasebe.Entities.Donemler;
-using OnMuhasebe.Entities.Faturalar;
-using OnMuhasebe.Entities.Hizmetler;
-using OnMuhasebe.Entities.Kasalar;
-using OnMuhasebe.Entities.Makbuzlar;
-using OnMuhasebe.Entities.Masraflar;
-using OnMuhasebe.Entities.OzelKodlar;
-using OnMuhasebe.Entities.Parametreler;
-using OnMuhasebe.Entities.Stoklar;
-using OnMuhasebe.Entities.Subeler;
-using System.Data;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.Data;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.TenantManagement;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
-
-namespace OnMuhasebe.EntityFrameworkCore;
+﻿namespace OnMuhasebe.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
@@ -100,40 +66,28 @@ public class OnMuhasebeDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+        builder.ConfigureBanka();
+        builder.ConfigureBankaSube();
+        builder.ConfigureBankaHesap();
+        builder.ConfigureBirim();
+        builder.ConfigureCari();
+        builder.ConfigureDepo();
+        builder.ConfigureDonem();
+        builder.ConfigureFatura();
+        builder.ConfigureFaturaHareket();
+        builder.ConfigureFirmaParametre();
+        builder.ConfigureHizmet();
+        builder.ConfigureKasa();
+        builder.ConfigureMakbuz();
+        builder.ConfigureMakbuzHareket();
+        builder.ConfigureMasraf();
+        builder.ConfigureOzelKod();
+        builder.ConfigureStok();
+        builder.ConfigureSube();
+
 
         /* Configure your own tables/entities inside here */
 
-        builder.Entity<Banka>(b =>
-        {
-            b.ToTable(OnMuhasebeConsts.DbTablePrefix + "Bankalar", OnMuhasebeConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
-            //properties
-            b.Property(x => x.Kod)
-            .IsRequired()
-            .HasColumnType(SqlDbType.VarChar.ToString())
-            .HasMaxLength(EntityConsts.MaxKodLength);
-            b.Property(x => x.Ad)
-            .IsRequired()
-            .HasColumnType(SqlDbType.VarChar.ToString())
-            .HasMaxLength(EntityConsts.MaxAdLength);
-            b.Property(x => x.OzelKod1Id)
-            .HasColumnType(SqlDbType.UniqueIdentifier.ToString());
-            b.Property(x => x.OzelKod2Id)
-            .HasColumnType(SqlDbType.UniqueIdentifier.ToString());
-            b.Property(x => x.Aciklama)
-            .HasColumnType(SqlDbType.VarChar.ToString())
-            .HasMaxLength(EntityConsts.MaxAciklamaLength);
-            b.Property(x => x.Durum)
-            .HasColumnType(SqlDbType.Bit.ToString());
-            //indexes
-            b.HasIndex(x => x.Kod);
-            //relations
-            b.HasOne(x => x.OzelKod1)
-            .WithMany(y => y.OzelKod1Bankalar)
-            .OnDelete(DeleteBehavior.NoAction);
-            b.HasOne(x => x.OzelKod2)
-            .WithMany(y => y.OzelKod2Bankalar)
-            .OnDelete(DeleteBehavior.NoAction);
-        });
+
     }
 }
