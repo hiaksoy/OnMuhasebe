@@ -28,7 +28,7 @@ public class EfCoreCommonRepository<TEntity> : EfCoreRepository<OnMuhasebeDbCont
             return entity;
         }
 
-        entity  = await queryable.FirstOrDefaultAsync();
+        entity = await queryable.FirstOrDefaultAsync();
         if (entity == null)
             throw new EntityNotFoundException(typeof(TEntity), id);
         return entity;
@@ -38,7 +38,7 @@ public class EfCoreCommonRepository<TEntity> : EfCoreRepository<OnMuhasebeDbCont
         var queryable = await WithDetailsAsync(includeProperties);
 
         if (predicate != null)
-           return await queryable.FirstOrDefaultAsync(predicate);
+            return await queryable.FirstOrDefaultAsync(predicate);
 
         return await queryable.FirstOrDefaultAsync();
     }
@@ -58,7 +58,7 @@ public class EfCoreCommonRepository<TEntity> : EfCoreRepository<OnMuhasebeDbCont
             throw new EntityNotFoundException(typeof(TEntity), id);
         return entity;
     }
-    public async Task<List<TEntity>> GetPagedLastListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null, params Expression<Func<TEntity, object>>[] includeProperties)
+    public async Task<List<TEntity>> GetPagedListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null, params Expression<Func<TEntity, object>>[] includeProperties)
     {
         var queryable = await WithDetailsAsync(includeProperties);
         if (predicate != null)
@@ -67,31 +67,62 @@ public class EfCoreCommonRepository<TEntity> : EfCoreRepository<OnMuhasebeDbCont
             queryable = queryable.OrderBy(orderBy);
         return await queryable.Skip(skipCount).Take(maxResultCount).ToListAsync();
     }
-
-    public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate = null)
+    public async Task<List<TEntity>> GetPagedListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null)
     {
-        throw new NotImplementedException();
+        var queryable = await WithDetailsAsync();
+        if (predicate != null)
+            queryable = queryable.Where(predicate);
+        if (orderBy != null)
+            queryable = queryable.OrderBy(orderBy);
+        return await queryable.Skip(skipCount).Take(maxResultCount).ToListAsync();
     }
-
-    public Task<IList<TEntity>> FromSqlRawAsync(string sql, params object[] parameters)
+    public async Task<List<TEntity>> GetPagedLastListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null, params Expression<Func<TEntity, object>>[] includeProperties)
     {
-        throw new NotImplementedException();
+        var queryable = await WithDetailsAsync(includeProperties);
+        if (predicate != null)
+            queryable = queryable.Where(predicate);
+        if (orderBy != null)
+            queryable = queryable.OrderByDescending(orderBy);
+        return await queryable.Skip(skipCount).Take(maxResultCount).ToListAsync();
     }
-
-    public Task<string> GetCodeAsync(Expression<Func<TEntity, string>> propetrySelector, Expression<Func<TEntity, bool>> predicate = null)
+    public async Task<string> GetCodeAsync(Expression<Func<TEntity, string>> propetrySelector, Expression<Func<TEntity, bool>> predicate = null)
     {
-        throw new NotImplementedException();
+        static string CreateNewCode(string code)
+        {
+            var number = "";
+
+            foreach (var character in code)
+            {
+                if (char.IsDigit(character))
+                    number += character;
+                else
+                    number = "";
+            }
+
+            var newNumber = number == "" ? "1" : (long.Parse(number) + 1).ToString();
+            var difference = code.Length - newNumber.Length;
+            if (difference < 0)
+                difference = 0;
+
+            var newCode = code.Substring(0, difference);
+            newCode += newNumber; //number değilde newNumber olabilir
+
+            return newCode;
+        }
+
+        var dbSet = await GetDbSetAsync();
+        var maxCode = predicate == null ? await dbSet.MaxAsync(propetrySelector) : await dbSet.Where(predicate).MaxAsync(propetrySelector);
+        return maxCode == null ? "0000000000000001" : CreateNewCode(maxCode);
     }
-
-    
-
-    public Task<List<TEntity>> GetPagedListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null, params Expression<Func<TEntity, object>>[] includeProperties)
+    public async Task<IList<TEntity>> FromSqlRawAsync(string sql, params object[] parameters)
     {
-        throw new NotImplementedException();
-    }
+        var context = await GetDbContextAsync();
+        return await context.Set<TEntity>().FromSqlRaw(sql, parameters).ToListAsync();
 
-    public Task<List<TEntity>> GetPagedListAsync<TKey>(int skipCount, int maxResultCount, Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity, TKey>> orderBy = null)
-    {
-        throw new NotImplementedException();
     }
+    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+           var dbSet = await GetDbSetAsync();
+           return predicate == null ? await dbSet.AnyAsync() : await dbSet.AnyAsync(predicate);
+        }
 }

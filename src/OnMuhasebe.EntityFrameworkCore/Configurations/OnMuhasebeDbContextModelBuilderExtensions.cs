@@ -1106,7 +1106,7 @@ public static class OnMuhasebeDbContextModelBuilderExtensions
             .HasMaxLength(EntityConsts.MaxAciklamaLength);
 
             b.Property(x => x.Durum)
-            .HasColumnType(SqlDbType.Bit.ToString());
+            .HasColumnType(SqlDbType.Bit.ToString()).IsRequired(false);
 
 
             //indexes

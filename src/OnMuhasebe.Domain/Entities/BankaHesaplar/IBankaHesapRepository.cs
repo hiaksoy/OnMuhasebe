@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OnMuhasebe.Entities.BankaHesaplar;
-public interface IBankaRepository : ICommonRepository<BankaHesap>
+public interface IBankaHesapRepository : ICommonRepository<BankaHesap>
 {
 
 }
