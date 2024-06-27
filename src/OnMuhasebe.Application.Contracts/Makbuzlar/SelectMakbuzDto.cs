@@ -9,15 +9,15 @@ namespace OnMuhasebe.Makbuzlar;
 public class SelectMakbuzDto : EntityDto<Guid>, IOzelKod
 {
     public MakbuzTuru MakbuzTuru { get; set; }
-    public string MakbuzNo { get; set; }
+    public string? MakbuzNo { get; set; }
     public DateTime Tarih { get; set; }
     public Guid? CariId { get; set; }
-    public string CariAdi { get; set; }
-    public string CariKodu { get; set; }
+    public string? CariAdi { get; set; }
+    public string? CariKodu { get; set; }
     public Guid? KasaId { get; set; }
-    public string KasaAdi { get; set; }
+    public string? KasaAdi { get; set; }
     public Guid? BankaHesapId { get; set; }
-    public string BankaHesapAdi { get; set; }
+    public string? BankaHesapAdi { get; set; }
     public int HareketSayisi { get; set; }
     public decimal CekToplam { get; set; }
     public decimal NakitToplam { get; set; }
@@ -25,14 +25,14 @@ public class SelectMakbuzDto : EntityDto<Guid>, IOzelKod
     public decimal PosToplam { get; set; }
     public decimal BankaToplam { get; set; }
     public decimal GenelToplam => CekToplam + NakitToplam + SenetToplam + PosToplam + BankaToplam;
-    public string OzelKod1Adi { get; set; }
-    public string OzelKod2Adi { get; set; }
+    public string? OzelKod1Adi { get; set; }
+    public string? OzelKod2Adi { get; set; }
     public Guid? OzelKod1Id { get; set; }
     public Guid? OzelKod2Id { get; set; }
     public Guid SubeId { get; set; }
-    public string SubeAdi { get; set; }
+    public string? SubeAdi { get; set; }
     public Guid DonemId { get; set; }
-    public string Aciklama { get; set; }
+    public string? Aciklama { get; set; }
     public bool Durum { get; set; }
-    public List<SelectMakbuzHareketDto> MakbuzHareketler { get; set; }
+    public List<SelectMakbuzHareketDto>? MakbuzHareketler { get; set; }
 }

@@ -7,7 +7,7 @@ using Volo.Abp.Application.Dtos;
 namespace OnMuhasebe.Faturalar;
 public class UpdateFaturaDto : IEntityDto
 {
-    public string FaturaNo { get; set; }
+    public string? FaturaNo { get; set; }
     public DateTime FaturaTarihi { get; set; }
     public decimal BrutTutar { get; set; }
     public decimal IndirimTutar { get; set; }
@@ -18,7 +18,7 @@ public class UpdateFaturaDto : IEntityDto
     public Guid CariId { get; set; }
     public Guid? OzelKod1Id { get; set; }
     public Guid? OzelKod2Id { get; set; }
-    public string Aciklama { get; set; }
+    public string? Aciklama { get; set; }
     public bool Durum { get; set; }
-    public IList<FaturaHareketDto> FaturaHareketler { get; set; }
+    public IList<FaturaHareketDto>? FaturaHareketler { get; set; }
 }

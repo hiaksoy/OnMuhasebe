@@ -20,5 +20,5 @@ public class FaturaHareketDto : EntityDto<Guid>
     public decimal KdvHaricTutar { get; set; }
     public decimal KdvTutar { get; set; }
     public decimal NetTutar { get; set; }
-    public string Aciklama { get; set; }
+    public string? Aciklama { get; set; }
 }

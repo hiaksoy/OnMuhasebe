@@ -7,7 +7,7 @@ namespace OnMuhasebe.Faturalar;
 public class CreateFaturaDto : IEntityDto
 {
     public FaturaTuru? FaturaTuru { get; set; }
-    public string FaturaNo { get; set; }
+    public string? FaturaNo { get; set; }
     public DateTime? FaturaTarihi { get; set; }
     public decimal? BrutTutar { get; set; }
     public decimal? IndirimTutar { get; set; }
@@ -20,6 +20,6 @@ public class CreateFaturaDto : IEntityDto
     public Guid? OzelKod2Id { get; set; }
     public Guid? SubeId { get; set; }
     public Guid? DonemId { get; set; }
-    public string Aciklama { get; set; }
+    public string? Aciklama { get; set; }
     public bool Durum { get; set; }
 }
