@@ -24,3 +24,4 @@ global using OnMuhasebe.Entities.Parametreler;
 global using OnMuhasebe.OzelKodlar;
 global using OnMuhasebe.Entities.Stoklar;
 global using OnMuhasebe.Entities.Masraflar;
+global using OnMuhasebe.Commons;

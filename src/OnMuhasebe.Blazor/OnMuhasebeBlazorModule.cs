@@ -37,6 +37,7 @@ using Volo.Abp.OpenIddict;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using DevExpress.Blazor.Configuration;
 
 namespace OnMuhasebe.Blazor;
 
@@ -112,6 +113,7 @@ public class OnMuhasebeBlazorModule : AbpModule
         ConfigureBlazorise(context);
         ConfigureRouter(context);
         ConfigureMenu(context);
+        ConfigureDevExpress(context);
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -122,6 +124,16 @@ public class OnMuhasebeBlazorModule : AbpModule
             options.IsDynamicClaimsEnabled = true;
         });
     }
+
+    private void ConfigureDevExpress(ServiceConfigurationContext context)
+    {
+        context.Services.AddDevExpressBlazor();
+        context.Services.Configure<GlobalOptions>(options =>     
+        {
+            options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+        });
+    }
+
 
     private void ConfigureUrls(IConfiguration configuration)
     {
@@ -150,9 +162,13 @@ public class OnMuhasebeBlazorModule : AbpModule
                 BlazorLeptonXLiteThemeBundles.Styles.Global,
                 bundle =>
                 {
+                    bundle.AddFiles("/css/site.css");
+                    bundle.AddFiles("/css/boostrap/bootsrap.min.css");
                     bundle.AddFiles("/blazor-global-styles.css");
-                    //You can remove the following line if you don't use Blazor CSS isolation for components
                     bundle.AddFiles("/OnMuhasebe.Blazor.styles.css");
+                    bundle.AddFiles("/_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css");
+                    bundle.AddFiles("/_content/Blazor.Core/css/component.css");
+
                 }
             );
         });
