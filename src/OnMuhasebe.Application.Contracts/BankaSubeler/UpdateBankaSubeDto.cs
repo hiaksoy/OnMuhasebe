@@ -11,5 +11,5 @@ public class UpdateBankaSubeDto : IEntityDto
     public Guid? OzelKod1Id { get; set; }
     public Guid? OzelKod2Id { get; set; }
     public string? Aciklama { get; set; }
-    public bool Durum { get; set; }
+    public bool Durum { get; set; } = true;
 }

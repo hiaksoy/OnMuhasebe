@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMuhasebe.MakbuzHareketler;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -21,4 +22,5 @@ public class ListBankaHesapDto : EntityDto<Guid>
     public decimal BorcBakiye => Borc - Alacak > 0 ? Borc - Alacak : 0;
     public decimal AlacakBakiye => Alacak - Borc > 0 ? Alacak - Borc : 0;
     public string? Aciklama { get; set; }
+    public ICollection<SelectMakbuzHareketDto> MakbuzHareketler { get; set; }
 }

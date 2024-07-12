@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMuhasebe.Makbuzlar;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -19,4 +20,6 @@ public class ListCariDto : EntityDto<Guid>
     public decimal BorcBakiye => Borc - Alacak > 0 ? Borc - Alacak : 0;
     public decimal AlacakBakiye => Alacak - Borc > 0 ? Alacak - Borc : 0;
     public string? Aciklama { get; set; }
+    public ICollection<SelectFaturaDto> Faturalar { get; set; }
+    public ICollection<SelectMakbuzDto> Makbuzlar { get; set; }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.MakbuzHareketler;
-public class MakbuzHareketDto : EntityDto<Guid>
+public class MakbuzHareketDto : EntityDto<Guid?>
 {
     public OdemeTuru? OdemeTuru { get; set; }
     public string? TakipNo { get; set; }

@@ -15,7 +15,7 @@ public class UpdateFaturaDto : IEntityDto
     public decimal KdvTutar { get; set; }
     public decimal NetTutar { get; set; }
     public int HareketSayisi { get; set; }
-    public Guid CariId { get; set; }
+    public Guid? CariId { get; set; }
     public Guid? OzelKod1Id { get; set; }
     public Guid? OzelKod2Id { get; set; }
     public string? Aciklama { get; set; }

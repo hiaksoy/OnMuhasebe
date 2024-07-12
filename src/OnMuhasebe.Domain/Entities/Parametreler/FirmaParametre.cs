@@ -7,10 +7,10 @@ public class FirmaParametre : Entity<Guid>
     public Guid? DepoId { get; set; }
 
     #region Navigation Properties
-    public IdentityUser? User { get; set; }
-    public Sube? Sube { get; set; }
-    public Donem? Donem { get; set; }
-    public Depo? Depo { get; set; }
+    public IdentityUser User { get; set; }
+    public Sube Sube { get; set; }
+    public Donem Donem { get; set; }
+    public Depo Depo { get; set; }
 
     #endregion
 }

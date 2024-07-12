@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMuhasebe.FaturaHareketler;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -14,4 +15,5 @@ public class ListDepoDto : EntityDto<Guid>
     public decimal Giren { get; set; }
     public decimal Cikan { get; set; }
     public decimal Mevcut => Giren - Cikan;
+    public ICollection<SelectFaturaHareketDto> FaturaHareketler { get; set; }
 }

@@ -5,4 +5,5 @@ global using Volo.Abp.Identity;
 global using OnMuhasebe.Faturalar;
 global using OnMuhasebe.Services;
 global using OnMuhasebe.CommonDtos;
+global using OnMuhasebe.Consts;
 

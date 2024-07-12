@@ -12,4 +12,5 @@ public class EfCoreFirmaParametreRepository : EfCoreCommonRepository<FirmaParame
     public EfCoreFirmaParametreRepository(IDbContextProvider<OnMuhasebeDbContext> dbContextProvider) : base(dbContextProvider)
     {
     }
+
 }

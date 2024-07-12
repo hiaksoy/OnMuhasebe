@@ -44,6 +44,8 @@ public class OnMuhasebeDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    public DbSet<IdentitySession> Sessions => throw new NotImplementedException();
+
     #endregion
 
     public OnMuhasebeDbContext(DbContextOptions<OnMuhasebeDbContext> options)

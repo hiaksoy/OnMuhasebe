@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnMuhasebe.FaturaHareketler;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -22,4 +23,5 @@ public class CreateFaturaDto : IEntityDto
     public Guid? DonemId { get; set; }
     public string? Aciklama { get; set; }
     public bool Durum { get; set; }
+    public ICollection<FaturaHareketDto> FaturaHareketler { get; set; }
 }
