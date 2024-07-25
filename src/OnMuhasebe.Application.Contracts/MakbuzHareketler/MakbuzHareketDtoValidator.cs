@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Localization;
 using OnMuhasebe.Makbuzlar;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMuhasebe.MakbuzHareketler;
 public class MakbuzHareketDtoValidator :AbstractValidator<MakbuzHareketDto>

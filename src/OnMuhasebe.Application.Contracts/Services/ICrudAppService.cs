@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Application.Services;
+﻿using Volo.Abp.Application.Services;
 
 namespace OnMuhasebe.Services;
 public interface ICrudAppService<TGetOutputDto, TGetListOutputDto,in TGetListInput, in TCreateInput, in TUpdateInput> :

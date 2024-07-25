@@ -1,0 +1,89 @@
+﻿@page "/"
+@using BlazorUI.Core.Components.Dev.Layouts
+@using BlazorUI.Core.Components.Dev.DataEditors
+@using BlazorUI.Core.Helpers
+@using BlazorUI.Core.Models
+
+<BlazorUI.Core.Components.Dev.Utilities.DevPageHeader Caption="Banka Hesap Kartları"/>
+<BlazorUI.Core.Components.Commons.Loadings.CircleLoading Caption="Lütfen bekleyiniz..." Text="Sayfa yükleniyor" />
+
+
+<DevGridLayout ColumnCount="5"
+               ColumnSpacing="3px"
+               RowCount="10"
+               RowSpacing="3px"
+               ColumnWidths="@(new[]{"100px","5px","300px"})">
+
+    <GridLayoutItems>
+        <DevTextEdit Caption="Adı Soyadı"
+                     ColumnIndex="2"
+                     RowIndex="0"
+                     NullText="Değer Girin..."
+                     IsFocus="true" />
+
+        <DevTelEdit Caption="Telefon"
+                    ColumnIndex="2"
+                    RowIndex="1"
+                    IsFocus="false" />
+
+        <DevEmailEdit Caption="Email"
+                      ColumnIndex="2"
+                      RowIndex="2"
+                      IsFocus="false" />
+
+        <DevDateEdit Caption="Doğum tarihi"
+                     ColumnIndex="2"
+                     RowIndex="3"
+                     Value="DateTime.Now.Date" />
+
+        <DevIbanNoEdit Caption="Iban NO"
+                       ColumnIndex="2"
+                       RowIndex="4"
+                       IsFocus="false" />
+
+        <DevMemoEdit Caption="Notlar"
+                     ColumnIndex="2"
+                     RowIndex="5"
+                     ColumnSpan="2"
+                     RowSpan="2" />
+
+        <DevCheckEdit Caption="Durum"
+                      ColumnIndex="2"
+                      RowIndex="7"
+                      TrueCaption="Aktif"
+                      FalseCaption="Pasif" />
+
+
+        <DevLabel ColumnIndex="3" RowIndex="8" Caption="@SelectedEnum.ToString()"></DevLabel>
+
+        <DevButtonEdit Caption="Button"
+                       ColumnIndex="2"
+                       RowIndex="9">
+
+        </DevButtonEdit>
+
+    </GridLayoutItems>
+
+</DevGridLayout>
+
+
+
+@code {
+    public enum BankaHesapTuru
+    {
+        VadesizMevduatHesabi = 1,
+        VadeliMevduatHesabi = 2,
+        KrediHesabi = 3,
+        PosBlokeHesabi = 4,
+        FonHesabi = 5,
+        YatirimHesabi = 6,
+    }
+
+    static BankaHesapTuru SelectedEnum = BankaHesapTuru.PosBlokeHesabi;
+
+    void GetEnumValue(ComboBoxEnumItem<BankaHesapTuru> hesapTuru)
+    {
+        SelectedEnum = hesapTuru.Value;
+        StateHasChanged();
+    }
+}

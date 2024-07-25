@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnMuhasebe.BankaHesaplar;
+﻿namespace OnMuhasebe.BankaHesaplar;
 public static class BankaHesapConsts
 {
     public const int MaxHesapNoLength = 20;

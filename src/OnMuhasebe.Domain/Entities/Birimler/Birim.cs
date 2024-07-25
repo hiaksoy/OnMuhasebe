@@ -1,6 +1,4 @@
 ﻿
-using OnMuhasebe.Entities.Stoklar;
-
 namespace OnMuhasebe.Entities.Birimler;
 public class Birim :FullAuditedAggregateRoot<Guid>
 {

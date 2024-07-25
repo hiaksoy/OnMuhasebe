@@ -1,6 +1,4 @@
-﻿using OnMuhasebe.Entities.Parametreler;
-
-namespace OnMuhasebe.Entities.Donemler;
+﻿namespace OnMuhasebe.Entities.Donemler;
 public class Donem : FullAuditedAggregateRoot<Guid>
 {
     public string? Kod { get; set; }

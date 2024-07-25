@@ -1,6 +1,4 @@
-﻿using OnMuhasebe.Entities.Parametreler;
-
-namespace OnMuhasebe.Entities.Subeler;
+﻿namespace OnMuhasebe.Entities.Subeler;
 public class Sube : FullAuditedAggregateRoot<Guid>
 {
     public string? Kod { get; set; }

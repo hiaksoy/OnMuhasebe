@@ -1,17 +1,7 @@
-﻿using AutoMapper.Configuration.Annotations;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnMuhasebe.Entities.Parametreler;
 using OnMuhasebe.Parametreler;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-
 
 
 namespace OnMuhasebe.AppServices.FirmaParametreler;

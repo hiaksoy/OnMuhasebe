@@ -1,8 +1,4 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.MakbuzHareketler;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OnMuhasebe.MakbuzHareketler;
 using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.Makbuzlar;

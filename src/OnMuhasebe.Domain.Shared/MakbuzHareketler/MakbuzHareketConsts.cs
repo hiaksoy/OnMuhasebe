@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnMuhasebe.MakbuzHareketler;
+﻿namespace OnMuhasebe.MakbuzHareketler;
 public static class MakbuzHareketConsts
 {
     public const int MaxTakipNoLength = 20;

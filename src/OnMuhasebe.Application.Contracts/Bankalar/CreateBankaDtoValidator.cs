@@ -1,10 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Localization;
-using OnMuhasebe.Consts;
 using OnMuhasebe.Localization;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMuhasebe.Bankalar;
 public class CreateBankaDtoValidator : AbstractValidator<CreateBankaDto>

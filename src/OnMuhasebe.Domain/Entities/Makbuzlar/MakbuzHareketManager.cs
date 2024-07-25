@@ -1,13 +1,4 @@
-﻿using OnMuhasebe.Entities.Depolar;
-using OnMuhasebe.Entities.Hizmetler;
-using OnMuhasebe.Entities.Masraflar;
-using OnMuhasebe.Entities.Stoklar;
-using OnMuhasebe.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OnMuhasebe.Extensions;
 using Volo.Abp.Domain.Services;
 
 namespace OnMuhasebe.Entities.Makbuzlar;

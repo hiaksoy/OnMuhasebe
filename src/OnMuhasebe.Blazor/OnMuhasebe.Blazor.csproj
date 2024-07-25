@@ -19,6 +19,7 @@
     <PackageReference Include="Blazorise.Bootstrap5" Version="1.5.3" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.3" />
     <PackageReference Include="DevExpress.Blazor" Version="23.1.5" />
+    <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -33,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blazor.Core\Blazor.Core.csproj" />
+    <ProjectReference Include="..\BlazorUI.Core\BlazorUI.Core.csproj" />
     <ProjectReference Include="..\OnMuhasebe.Application\OnMuhasebe.Application.csproj" />
     <ProjectReference Include="..\OnMuhasebe.HttpApi\OnMuhasebe.HttpApi.csproj" />
     <ProjectReference Include="..\OnMuhasebe.EntityFrameworkCore\OnMuhasebe.EntityFrameworkCore.csproj" />
@@ -46,27 +47,7 @@
     <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="8.2.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="Exists('./openiddict.pfx')">
-    <None Remove="openiddict.pfx" />
-    <EmbeddedResource Include="openiddict.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Logs\**" />
-    <Content Remove="Logs\**" />
-    <EmbeddedResource Remove="Logs\**" />
-    <None Remove="Logs\**" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Pages\**\*.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Pages\**\*.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>

@@ -1,8 +1,4 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.FaturaHareketler;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OnMuhasebe.FaturaHareketler;
 using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.Faturalar;

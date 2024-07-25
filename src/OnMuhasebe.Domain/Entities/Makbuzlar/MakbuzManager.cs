@@ -1,12 +1,6 @@
 ﻿using OnMuhasebe.Extensions;
 using OnMuhasebe.Makbuzlar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
-using Volo.Abp.Uow;
 
 namespace OnMuhasebe.Entities.Makbuzlar;
 public class MakbuzManager : DomainService

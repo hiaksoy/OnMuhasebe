@@ -1,0 +1,59 @@
+﻿@using System.Globalization
+@inherits DevBaseEditor
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  Row="RowIndex"
+                  ColumnSpan="ColumnSpan"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxDateEdit @ref="_dxDateEdit"
+                    @bind-Date="@Value"
+                    Enabled="Enabled"
+                    Mask="@DateTimeMask.ShortDate">
+            <MaskProperties>
+                <DxDateTimeMaskProperties CaretMode="MaskCaretMode.Advancing"
+                                          Culture="CultureInfo.CurrentCulture" />
+            </MaskProperties>
+        </DxDateEdit>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex - 2"
+          RowIndex="RowIndex"
+          Visible="Visible">
+
+</DevLabel>
+
+<DevLabel Caption="@SeperateCaption"
+          ColumnIndex="ColumnIndex - 1"
+          RowIndex="RowIndex"
+          Visible="Visible">
+</DevLabel>
+
+
+@code {
+    private DxDateEdit<DateTime> _dxDateEdit;
+    private DateTime _value;
+
+    [Parameter] public EventCallback<DateTime> ValueChanged { get; set; }
+
+    [Parameter] public DateTime Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxDateEdit.FocusAsync();
+
+    }
+}

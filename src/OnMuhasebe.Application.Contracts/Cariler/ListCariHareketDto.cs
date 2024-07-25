@@ -1,8 +1,4 @@
-﻿using OnMuhasebe.Faturalar;
-using OnMuhasebe.Makbuzlar;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OnMuhasebe.Makbuzlar;
 using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.Cariler;

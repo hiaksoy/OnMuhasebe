@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Localization;
 using OnMuhasebe.FaturaHareketler;
 using OnMuhasebe.Localization;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMuhasebe.Faturalar;
 public class UpdateFaturaDtoValidator : AbstractValidator<UpdateFaturaDto>

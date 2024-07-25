@@ -1,8 +1,4 @@
-﻿using OnMuhasebe.Faturalar;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.FaturaHareketler;
 public class FaturaHareketDto : EntityDto<Guid?>

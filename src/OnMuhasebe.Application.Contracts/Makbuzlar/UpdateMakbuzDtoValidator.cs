@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Localization;
 using OnMuhasebe.Localization;
 using OnMuhasebe.MakbuzHareketler;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMuhasebe.Makbuzlar;
 public class UpdateMakbuzDtoValidator : AbstractValidator<UpdateMakbuzDto>

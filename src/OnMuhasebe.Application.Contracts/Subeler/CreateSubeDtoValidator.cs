@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Localization;
 using OnMuhasebe.Localization;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnMuhasebe.Subeler;
 public class CreateSubeDtoValidator : AbstractValidator<CreateSubeDto>

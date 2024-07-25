@@ -1,8 +1,4 @@
-﻿using OnMuhasebe.CommonDtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace OnMuhasebe.Stoklar;
 public class SelectStokDto : EntityDto<Guid> , IOzelKod

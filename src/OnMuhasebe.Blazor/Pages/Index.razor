@@ -1,72 +1,87 @@
 ﻿@page "/"
-@namespace Blazor.Core
-@using Blazor.Core.Components.DevEx.Layouts
-@using Blazor.Core.Components.DevEx.DataEditors
+@using BlazorUI.Core.Components.Dev.Layouts
+@using BlazorUI.Core.Components.Dev.DataEditors
+@using BlazorUI.Core.Helpers
+@using BlazorUI.Core.Models
+@using Microsoft.Extensions.Localization
+@using OnMuhasebe.BankaHesaplar
+@using OnMuhasebe.Localization
+
+@inject IStringLocalizer<OnMuhasebeResource> L
 
 
-<DevExGridLayout ColumnSpacing="3px"
-                 RowSpacing="3px"
-                 RowCount=3
-                 ColumnCount=3
-                 RowHeights="@(new[]{"28","28","28"})"
-                 ColumnWidths="@(new[]{"150px"})">
+<DevGridLayout ColumnCount="5"
+               ColumnSpacing="3px"
+               RowCount="10"
+               RowSpacing="3px"
+               ColumnWidths="@(new[]{"100px","5px","300px"})">
 
     <GridLayoutItems>
 
+        <DevTextEdit Caption="Adı Soyadı"
+                     ColumnIndex="2"
+                     RowIndex="0"
+                     NullText="Değer Girin..."
+                     IsFocus="true" />
 
-        <DevExLabel Caption="Adı Soyadı"
-                    ColumnIndex="0"
-                    RowIndex="0" />
+        <DevTelEdit Caption="Telefon"
+                    ColumnIndex="2"
+                    RowIndex="1"
+                    IsFocus="false" />
 
-        <DxGridLayoutItem Row="0" Column="1">
-            <Template>
-                <DxTextBox Text="0-1"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevEmailEdit Caption="Email"
+                      ColumnIndex="2"
+                      RowIndex="2"
+                      IsFocus="false" />
 
-        <DxGridLayoutItem Row="0" Column="2">
-            <Template>
-                <DxTextBox Text="0-2"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevDateEdit Caption="Doğum tarihi"
+                     ColumnIndex="2"
+                     RowIndex="3"
+                     Value="DateTime.Now.Date" />
 
-        <DxGridLayoutItem Row="1" Column="0">
-            <Template>
-                <DxTextBox Text="1-0"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevIbanNoEdit Caption="Iban NO"
+                       ColumnIndex="2"
+                       RowIndex="4"
+                       IsFocus="false" />
 
-        <DxGridLayoutItem Row="1" Column="1">
-            <Template>
-                <DxTextBox Text="1-1"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevMemoEdit Caption="Notlar"
+                     ColumnIndex="2"
+                     RowIndex="5"
+                     ColumnSpan="2"
+                     RowSpan="2" />
 
-        <DxGridLayoutItem Row="1" Column="2">
-            <Template>
-                <DxTextBox Text="1-2"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevCheckEdit Caption="Durum"
+                      ColumnIndex="2"
+                      RowIndex="7"
+                      TrueCaption="Aktif"
+                      FalseCaption="Pasif" />
 
-        <DxGridLayoutItem Row="2" Column="0">
-            <Template>
-                <DxTextBox Text="2-0"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        <DevComboBoxEnumEdit TItem="BankaHesapTuru"
+                             Caption="Banka Hesap"
+                             ColumnIndex="2"
+                             RowIndex="8"
+                             DataSource="Functions.FillEnumToComboBox<BankaHesapTuru>(L)"
+                             Value="SelectedEnum"
+                             TextFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.DisplayName)"
+                             ValueFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.Value)"
+                             SelectedItemChanged="GetEnumValue">
 
-        <DxGridLayoutItem Row="2" Column="1">
-            <Template>
-                <DxTextBox Text="2-1"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
+        </DevComboBoxEnumEdit>
 
-        <DxGridLayoutItem Row="2" Column="2">
-            <Template>
-                <DxTextBox Text="2-2"></DxTextBox>
-            </Template>
-        </DxGridLayoutItem>
-
-
+        <DevLabel ColumnIndex="3" RowIndex="8" Caption="@SelectedEnum.ToString()"></DevLabel>
 
     </GridLayoutItems>
-</DevExGridLayout>
+
+</DevGridLayout>
+
+
+@code {
+
+    static BankaHesapTuru SelectedEnum = BankaHesapTuru.PosBlokeHesabi;
+
+    void GetEnumValue(ComboBoxEnumItem<BankaHesapTuru> hesapTuru)
+    {
+        SelectedEnum = hesapTuru.Value;
+        StateHasChanged();
+    }
+}

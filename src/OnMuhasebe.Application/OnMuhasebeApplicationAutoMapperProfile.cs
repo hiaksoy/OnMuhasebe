@@ -38,6 +38,7 @@ namespace OnMuhasebe;
 
 public class OnMuhasebeApplicationAutoMapperProfile : Profile
 {
+#nullable disable
     public OnMuhasebeApplicationAutoMapperProfile()
     {
         //banka
@@ -49,6 +50,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaDto, Banka>();
         CreateMap<UpdateBankaDto, Banka>();
+        CreateMap<SelectBankaDto, CreateBankaDto>();
+        CreateMap<SelectBankaDto, UpdateBankaDto>();
 
         //bankasube
         CreateMap<BankaSube, SelectBankaSubeDto>()
@@ -61,6 +64,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaSubeDto, BankaSube>();
         CreateMap<UpdateBankaSubeDto, BankaSube>();
+        CreateMap<SelectBankaSubeDto, CreateBankaSubeDto>();
+        CreateMap<SelectBankaSubeDto, UpdateBankaSubeDto>();
 
 
         //bankahesap
@@ -78,6 +83,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaHesapDto, BankaHesap>();
         CreateMap<UpdateBankaHesapDto, BankaHesap>();
+        CreateMap<SelectBankaHesapDto, CreateBankaHesapDto>();
+        CreateMap<SelectBankaHesapDto, UpdateBankaHesapDto>();
 
         //birim
 
@@ -89,6 +96,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBirimDto, Birim>();
         CreateMap<UpdateBirimDto, Birim>();
+        CreateMap<SelectBirimDto, CreateBirimDto>();
+        CreateMap<SelectBirimDto, UpdateBirimDto>();
 
         //cari
         CreateMap<Cari, SelectCariDto>()
@@ -99,6 +108,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateCariDto, Cari>();
         CreateMap<UpdateCariDto, Cari>();
+        CreateMap<SelectCariDto, CreateCariDto>();
+        CreateMap<SelectCariDto, UpdateCariDto>();
 
         //depo
 
@@ -112,6 +123,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.Cikan, y => y.MapFrom(z => z.FaturaHareketler.Where(x => x.Fatura.FaturaTuru == FaturaTuru.Satis).Sum(x => x.Miktar)));
         CreateMap<CreateDepoDto, Depo>();
         CreateMap<UpdateDepoDto, Depo>();
+        CreateMap<SelectDepoDto, CreateDepoDto>();
+        CreateMap<SelectDepoDto, UpdateDepoDto>();
 
         //donem
 
@@ -119,6 +132,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<Donem, ListDonemDto>();
         CreateMap<CreateDonemDto, Donem>();
         CreateMap<UpdateDonemDto, Donem>();
+        CreateMap<SelectDonemDto, CreateDonemDto>();
+        CreateMap<SelectDonemDto, UpdateDonemDto>();
 
 
         //fatura
@@ -178,6 +193,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.Cikan, y => y.MapFrom(z => z.FaturaHareketler.Where(x => x.Fatura.FaturaTuru == FaturaTuru.Satis).Sum(x => x.Miktar)));
         CreateMap<CreateHizmetDto, Hizmet>();
         CreateMap<UpdateHizmetDto, Hizmet>();
+        CreateMap<SelectHizmetDto, CreateHizmetDto>();
+        CreateMap<SelectHizmetDto, UpdateHizmetDto>();
 
         //kasa
 
@@ -192,6 +209,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.Alacak, y => y.MapFrom(z => z.MakbuzHareketler.Where(x => x.BelgeDurumu == BelgeDurumu.Odendi).Sum(x => x.Tutar)));
         CreateMap<CreateKasaDto, Kasa>();
         CreateMap<UpdateKasaDto, Kasa>();
+        CreateMap<SelectKasaDto, CreateKasaDto>();
+        CreateMap<SelectKasaDto, UpdateKasaDto>();
 
         //makbuz
 
@@ -237,6 +256,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.Cikan, y => y.MapFrom(z => z.FaturaHareketler.Where(x => x.Fatura.FaturaTuru == FaturaTuru.Satis).Sum(x => x.Miktar)));
         CreateMap<CreateMasrafDto, Masraf>();
         CreateMap<UpdateMasrafDto, Masraf>();
+        CreateMap<SelectMasrafDto, CreateMasrafDto>();
+        CreateMap<SelectMasrafDto, UpdateMasrafDto>();
 
         //ozelkod
 
@@ -244,6 +265,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<OzelKod, ListOzelKodDto>();
         CreateMap<CreateOzelKodDto, OzelKod>();
         CreateMap<UpdateOzelKodDto, OzelKod>();
+        CreateMap<SelectOzelKodDto, CreateOzelKodDto>();
+        CreateMap<SelectOzelKodDto, UpdateOzelKodDto>();
 
         //FirmaParametre
 
@@ -268,6 +291,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.Cikan, y => y.MapFrom(z => z.FaturaHareketler.Where(x => x.Fatura.FaturaTuru == FaturaTuru.Satis).Sum(x => x.Miktar)));
         CreateMap<CreateStokDto, Stok>();
         CreateMap<UpdateStokDto, Stok>();
+        CreateMap<SelectStokDto, CreateStokDto>();
+        CreateMap<SelectStokDto, UpdateStokDto>();
 
 
         //sube
@@ -276,5 +301,7 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<Sube, ListSubeDto>();
         CreateMap<CreateSubeDto, Sube>();
         CreateMap<UpdateSubeDto, Sube>();
+        CreateMap<SelectSubeDto, CreateSubeDto>();
+        CreateMap<SelectSubeDto, UpdateSubeDto>();
     }
 }

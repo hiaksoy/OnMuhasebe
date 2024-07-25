@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnMuhasebe.Cariler;
+﻿namespace OnMuhasebe.Cariler;
 public static class CariConsts
 {
     public const int MaxVergiDairesiLength = 50;

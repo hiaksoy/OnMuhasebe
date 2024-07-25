@@ -1,9 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OnMuhasebe.Data;
-using Volo.Abp.DependencyInjection;
 
 namespace OnMuhasebe.EntityFrameworkCore;
 

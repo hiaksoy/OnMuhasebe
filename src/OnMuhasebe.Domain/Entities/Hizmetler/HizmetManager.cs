@@ -1,11 +1,4 @@
-﻿using OnMuhasebe.Entities.Depolar;
-using OnMuhasebe.Entities.Subeler;
-using OnMuhasebe.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OnMuhasebe.Extensions;
 using Volo.Abp.Domain.Services;
 
 namespace OnMuhasebe.Entities.Hizmetler;
