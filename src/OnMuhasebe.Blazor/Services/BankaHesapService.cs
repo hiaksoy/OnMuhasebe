@@ -16,8 +16,8 @@ public class BankaHesapService : BaseService<ListBankaHesapDto, SelectBankaHesap
         switch (targetEntity)
         {
             case SelectMakbuzHareketDto makbuzHareket:
-                makbuzHareket.CekBankaId = SelectedItem.Id;
-                makbuzHareket.CekBankaAdi = SelectedItem.Ad;
+                makbuzHareket.BankaHesapId = SelectedItem.Id;
+                makbuzHareket.BankaHesapAdi = SelectedItem.Ad;
                 break;
         }
     }

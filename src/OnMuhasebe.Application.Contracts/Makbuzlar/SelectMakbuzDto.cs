@@ -30,5 +30,5 @@ public class SelectMakbuzDto : EntityDto<Guid>, IOzelKod
     public Guid DonemId { get; set; }
     public string? Aciklama { get; set; }
     public bool Durum { get; set; }
-    public List<SelectMakbuzHareketDto>? MakbuzHareketler { get; set; }
+    public List<SelectMakbuzHareketDto> MakbuzHareketler { get; set; }
 }

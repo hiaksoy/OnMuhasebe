@@ -6,4 +6,6 @@ global using OnMuhasebe.Faturalar;
 global using OnMuhasebe.Services;
 global using OnMuhasebe.CommonDtos;
 global using OnMuhasebe.Consts;
-
+global using FluentValidation;
+global using Microsoft.Extensions.Localization;
+global using OnMuhasebe.Makbuzlar;

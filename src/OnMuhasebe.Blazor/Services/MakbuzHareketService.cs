@@ -1,4 +1,6 @@
 ﻿using BlazorUI.Core.Models;
+using FluentValidation;
+using OnMuhasebe.Blazor.Helpers;
 
 namespace OnMuhasebe.Blazor.Services;
 
@@ -49,6 +51,47 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
 
     public override void OnSubmit()
     {
-        
+        var validator = new SelectMakbuzHareketDtoValidator(L);
+        var result = validator.Validate(TempDataSource);
+
+        if (result.IsValid)
+        {
+            DataSource = TempDataSource;
+            DataSource.OdemeTuruAdi = L[$"Enum:OdemeTuru:{(byte)DataSource.OdemeTuru}"];
+            DataSource.BelgeDurumu = MakbuzService.MakbuzTuru == MakbuzTuru.Tahsilat &&
+                                    (DataSource.OdemeTuru == OdemeTuru.Nakit || DataSource.OdemeTuru == OdemeTuru.Banka)
+                                    ? BelgeDurumu.TahsilEdildi
+                                    : MakbuzService.MakbuzTuru == MakbuzTuru.Tahsilat && (DataSource.OdemeTuru == OdemeTuru.Senet ||
+                                                                                          DataSource.OdemeTuru == OdemeTuru.Cek ||
+                                                                                          DataSource.OdemeTuru == OdemeTuru.Pos)
+                                        ? BelgeDurumu.Portfoyde
+                                        : MakbuzService.MakbuzTuru == MakbuzTuru.Odeme && (DataSource.OdemeTuru == OdemeTuru.Nakit ||
+                                                                                           DataSource.OdemeTuru == OdemeTuru.Banka)
+                                            ? BelgeDurumu.Odendi
+                                            : MakbuzService.MakbuzTuru == MakbuzTuru.Odeme && (DataSource.OdemeTuru == OdemeTuru.Senet ||
+                                                                                             DataSource.OdemeTuru == OdemeTuru.Cek ||
+                                                                                             DataSource.OdemeTuru == OdemeTuru.Pos)
+                                               ? BelgeDurumu.Odenecek
+                                               : BelgeDurumu.CiroEdildi;
+
+            DataSource.BelgeDurumuAdi = L[$"Enum:BelgeDurumu:{(byte)DataSource.BelgeDurumu}"];
+            DataSource.KendiBelgemiz = DataSource.BelgeDurumu == BelgeDurumu.Odenecek; 
+            InsertOrUpdate();
+            HasChanged();
+        }
+        else
+            MessageService.Error(result.Errors.CreateValidationErrorMessage(L));
+    }
+
+    public override void GetTotal()
+    {
+        MakbuzService.DataSource.CekToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Cek).Sum(x => x.Tutar);
+        MakbuzService.DataSource.SenetToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Senet).Sum(x => x.Tutar);
+        MakbuzService.DataSource.NakitToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Nakit).Sum(x => x.Tutar);
+        MakbuzService.DataSource.BankaToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Banka).Sum(x => x.Tutar);
+        MakbuzService.DataSource.PosToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Pos).Sum(x => x.Tutar);
+        MakbuzService.DataSource.HareketSayisi = ListDataSource.Count;
+
+        HasChanged();
     }
 }
