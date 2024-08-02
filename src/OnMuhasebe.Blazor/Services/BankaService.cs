@@ -9,10 +9,16 @@ public class BankaService : BaseService<ListBankaDto, SelectBankaDto> , IScopedD
 {
     public override void SelectEntity(IEntityDto targetEntity)
     {
-        if (targetEntity is SelectBankaHesapDto bankaHesap)
+        switch (targetEntity)
         {
-            bankaHesap.BankaId = SelectedItem.Id;
-            bankaHesap.BankaAdi = SelectedItem.Ad;
+            case SelectBankaHesapDto bankaHesap:
+                bankaHesap.BankaId = SelectedItem.Id;
+                bankaHesap.BankaAdi = SelectedItem.Ad;
+                break;
+            case SelectMakbuzHareketDto makbuzHareket:
+                makbuzHareket.CekBankaId = SelectedItem.Id;
+                makbuzHareket.CekBankaAdi = SelectedItem.Ad;
+                break;
         }
     }
 }

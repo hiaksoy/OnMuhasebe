@@ -1,7 +1,4 @@
 ﻿using BlazorUI.Core.Models;
-using OnMuhasebe.BankaHesaplar;
-using OnMuhasebe.Blazor.Services.Base;
-using Volo.Abp.DependencyInjection;
 
 namespace OnMuhasebe.Blazor.Services;
 
@@ -12,5 +9,16 @@ public class BankaHesapService : BaseService<ListBankaHesapDto, SelectBankaHesap
     public void BankaHesapTuruSelectedItemChanged(ComboBoxEnumItem<BankaHesapTuru> selectedItem)
     {
         DataSource.HesapTuru = selectedItem.Value;
+    }
+
+    public override void SelectEntity(IEntityDto targetEntity)
+    {
+        switch (targetEntity)
+        {
+            case SelectMakbuzHareketDto makbuzHareket:
+                makbuzHareket.CekBankaId = SelectedItem.Id;
+                makbuzHareket.CekBankaAdi = SelectedItem.Ad;
+                break;
+        }
     }
 }

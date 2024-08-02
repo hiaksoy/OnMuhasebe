@@ -2,6 +2,7 @@
 
 <DxGridLayoutItem Column="ColumnIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
                   Row="RowIndex"
                   RowSpan="RowSpan"
                   Visible="Visible">
@@ -9,7 +10,9 @@
     <Template>
         <DxMaskedInput @ref="_dxMaskedInput"
                        @bind-Value="@Value"
+                       CssClass="@EditorCssClass"
                        Enabled="Enabled"
+                       InputCssClass="@InputCssClass"
                        Mask="(000) 000 00 00"
                        ReadOnly="ReadOnly">
 
@@ -27,7 +30,7 @@
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
           RowIndex="RowIndex">
 
@@ -37,6 +40,7 @@
     private DxMaskedInput<string> _dxMaskedInput;
     private string _value;
 
+    [Parameter] public override string EditorCssClass { get; set; } = "text-center";
     [Parameter] public EventCallback<string> ValueChanged { get; set; }
 
     [Parameter]

@@ -4,13 +4,11 @@
 @using BlazorUI.Core.Helpers
 @using BlazorUI.Core.Models
 
-<BlazorUI.Core.Components.Dev.Utilities.DevPageHeader Caption="Banka Hesap Kartları"/>
-<BlazorUI.Core.Components.Commons.Loadings.CircleLoading Caption="Lütfen bekleyiniz..." Text="Sayfa yükleniyor" />
-
+<BlazorUI.Core.Components.Dev.Utilities.DevPageHeader Caption="Banka Hesap Kartları" />
 
 <DevGridLayout ColumnCount="5"
                ColumnSpacing="3px"
-               RowCount="10"
+               RowCount="20"
                RowSpacing="3px"
                ColumnWidths="@(new[]{"100px","5px","300px"})">
 
@@ -34,6 +32,7 @@
         <DevDateEdit Caption="Doğum tarihi"
                      ColumnIndex="2"
                      RowIndex="3"
+                     IsFocus="false"
                      Value="DateTime.Now.Date" />
 
         <DevIbanNoEdit Caption="Iban NO"
@@ -47,20 +46,29 @@
                      ColumnSpan="2"
                      RowSpan="2" />
 
-        <DevCheckEdit Caption="Durum"
+        <DevCheckEditSunCloud Caption="Durum"
                       ColumnIndex="2"
-                      RowIndex="7"
+                      RowIndex="20"
                       TrueCaption="Aktif"
-                      FalseCaption="Pasif" />
+                      FalseCaption="Pasif"
+                      CaptionVisible="true"
+                      SeparateCaptionVisible="true"/>
 
 
-        <DevLabel ColumnIndex="3" RowIndex="8" Caption="@SelectedEnum.ToString()"></DevLabel>
+        <DevSpinEdit Caption="spinDeneme"
+                     ColumnIndex="2"
+                     RowIndex="8"
+                     IsFocus="false">
 
-        <DevButtonEdit Caption="Button"
-                       ColumnIndex="2"
-                       RowIndex="9">
+        </DevSpinEdit>
 
-        </DevButtonEdit>
+
+        <DevCurrencyEdit Caption="spinDeneme"
+                     ColumnIndex="2"
+                     RowIndex="9"
+                     IsFocus="false">
+
+        </DevCurrencyEdit>
 
     </GridLayoutItems>
 

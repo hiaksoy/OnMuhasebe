@@ -4,13 +4,16 @@
 <DxGridLayoutItem Column="ColumnIndex"
                   Row="RowIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
                   RowSpan="RowSpan"
                   Visible="Visible">
 
     <Template>
         <DxComboBox @ref="_dxComboBox"
                     @bind-Value="@Value"
+                    CssClass="@EditorCssClass"
                     Enabled="Enabled"
+                    InputCssClass="@InputCssClass"
                     ReadOnly="ReadOnly"
                     Data="DataSource"
                     TextFieldName="@TextFieldName"
@@ -22,13 +25,17 @@
 
 <DevLabel Caption="@Caption"
           ColumnIndex="ColumnIndex-2"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
 
 </DevLabel>
 

@@ -173,6 +173,7 @@ public class OnMuhasebeBlazorModule : AbpModule
                     bundle.AddFiles("/_content/DevExpress.Blazor.Themes/blazing-berry.bs5.css");
                     bundle.AddFiles("/_content/BlazorUI.Core/css/component.css");
                     bundle.AddFiles("/_content/BlazorUI.Core/css/circleload.css");
+                    bundle.AddFiles("/_content/BlazorUI.Core/css/css/all.css");
 
                 }
             );

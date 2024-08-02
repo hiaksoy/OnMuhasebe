@@ -15,6 +15,7 @@ public interface ICoreDataGridService<TDataGridItem>
 
     void ShowListPage(bool firstRender);
     void SetDataRowSelected(TDataGridItem item);
-
+    void SetDataRowSelected(bool first);
+    void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged);
 
 }

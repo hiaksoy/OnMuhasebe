@@ -2,8 +2,9 @@
 
 
 <DxGridLayoutItem Column="ColumnIndex"
-                  Row="RowIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
                   RowSpan="RowSpan"
                   Visible="Visible">
 
@@ -12,7 +13,9 @@
         <DxTextBox @ref="_dxTextBox"
                    @bind-Text="@Value"
                    ClearButtonDisplayMode="ClearButtonDisplayMode"
+                   CssClass="@EditorCssClass"
                    Enabled="Enabled"
+                   InputCssClass="@InputCssClass"
                    NullText="@NullText"
                    ReadOnly="ReadOnly">
 
@@ -23,13 +26,17 @@
 
 <DevLabel Caption="@Caption"
           ColumnIndex="ColumnIndex-2"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
 
 </DevLabel>
 

@@ -33,7 +33,7 @@
                            DataGridService.SelectedItems?.Count()>0 :
                            DataGridService.ListDataSource?.Count>0"
                   RenderStyle="SelectButtonRenderStyle"
-                  RenderStyleMode="SelectSubmitButtonRenderStyleMode"
+                  RenderStyleMode="SelectButtonRenderStyleMode"
                   Text="@SelectButtonText"
                   Visible="SelectButtonVisible">
         </DxButton>
@@ -78,7 +78,7 @@
     [Parameter] public bool Visible { get; set; }
     [Parameter] public bool SelectButtonVisible { get; set; } = true;
     [Parameter] public ButtonRenderStyle SelectButtonRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
-    [Parameter] public ButtonRenderStyleMode SelectSubmitButtonRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
+    [Parameter] public ButtonRenderStyleMode SelectButtonRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
     [Parameter] public string SelectButtonText { get; set; }
     [Parameter] public ButtonRenderStyle CancelButtonRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
     [Parameter] public ButtonRenderStyleMode CancelButtonRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;

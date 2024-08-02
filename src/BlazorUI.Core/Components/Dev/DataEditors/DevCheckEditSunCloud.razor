@@ -1,0 +1,81 @@
+﻿@inherits DevBaseEditor
+
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  Row="RowIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+
+    <Template>
+        <DxCheckBox @bind-Checked="@Value2"
+                    DisableDefaultRender="true">
+            <ChildContent>
+                <link rel="stylesheet" href="/_content/BlazorUI.Core/css/main.css" />
+                <div class="checkbox">
+                    <input id="day-night-checkbox" type="checkbox" class="checkbox_input">
+                    <label for="day-night-checkbox" class="checkbox_items">
+                        <div class="checkbox_sun-moon">
+                        </div>
+                        <div class="checkbox_stars">
+                            <div class="checkbox_star"></div>
+                        </div>
+                        <div class="checkbox_cloud-body">
+                            <div class="checkbox_cloud"></div>
+                        </div>
+                    </label>
+                </div>
+            </ChildContent>
+        </DxCheckBox>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+
+</DevLabel>
+
+@code {
+    private DxCheckBox<bool> _dxCheckBox;
+    private bool _value;
+    bool? Value2 { get; set; } = false;
+    [Parameter] public CheckBoxContentAlignment Alignment { get; set; } = CheckBoxContentAlignment.Right;
+    [Parameter] public CheckType CheckType { get; set; } = CheckType.Switch;
+    [Parameter] public LabelPosition LabelPosition { get; set; } = LabelPosition.Left;
+    [Parameter] public string TrueCaption { get; set; }
+    [Parameter] public string FalseCaption { get; set; }
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
+    [Parameter] public override bool SeparateCaptionVisible { get; set; } = false;
+    [Parameter] public override bool CaptionVisible { get; set; } = false;
+
+    [Parameter]
+    public bool Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxCheckBox.FocusAsync();
+
+    }
+}

@@ -3,7 +3,8 @@
             Checked="Checked"
             CheckedChanged="CheckedChanged"
             CheckType="CheckType"
-            LabelPosition="LabelPosition">
+            CssClass="@CssClass"
+            LabelPosition="LabelPosition" >
     <ChildContent>
         @(Checked ? TrueCaption : FalseCaption)
     </ChildContent>
@@ -12,14 +13,13 @@
 
 @code {
     [Parameter] public bool Checked { get; set; } = true;
-    [Parameter]
-    public CheckBoxContentAlignment Alignment { get; set; }
-                   = CheckBoxContentAlignment.Right;
+    [Parameter] public CheckBoxContentAlignment Alignment { get; set; } = CheckBoxContentAlignment.Right;
     [Parameter] public EventCallback<bool> CheckedChangedInvokeFunction { get; set; }
     [Parameter] public CheckType CheckType { get; set; } = CheckType.Switch;
     [Parameter] public LabelPosition LabelPosition { get; set; } = LabelPosition.Right;
     [Parameter] public string TrueCaption { get; set; }
     [Parameter] public string FalseCaption { get; set; }
+    [Parameter] public string CssClass { get; set; }
 
     private async Task CheckedChanged(bool @checked)
     {

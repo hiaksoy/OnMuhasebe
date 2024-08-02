@@ -32,13 +32,17 @@
             <DxButton Click="OnSubmit"
                       RenderStyle="SubmitButtonRenderStyle"
                       RenderStyleMode="SubmitButtonRenderStyleMode"
-                      Text="@SubmitButtonText">
+                      Text="@SubmitButtonText"
+                      CssClass="@SubmitButtonCssClass"
+                      IconCssClass="fa-solid fa-check">
             </DxButton>
 
             <DxButton Click="context.CloseCallback"
                       RenderStyle="CancelButtonRenderStyle"
                       RenderStyleMode="CancelButtonRenderStyleMode"
-                      Text="@CancelButtonText">
+                      Text="@CancelButtonText"
+                      CssClass="@CancelButtonCssClass"
+                      IconCssClass=@CancelButtonIconCssClass>
             </DxButton>
         </FooterContentTemplate>
 
@@ -75,7 +79,14 @@
     [Parameter] public ButtonRenderStyle SubmitButtonRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
     [Parameter] public ButtonRenderStyleMode SubmitButtonRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
     [Parameter] public string SubmitButtonText { get; set; }
+    [Parameter] public string SubmitButtonCssClass { get; set; } = "button-confirm";
     [Parameter] public ButtonRenderStyle CancelButtonRenderStyle { get; set; } = ButtonRenderStyle.Secondary;
     [Parameter] public ButtonRenderStyleMode CancelButtonRenderStyleMode { get; set; } = ButtonRenderStyleMode.Outline;
     [Parameter] public string CancelButtonText { get; set; }
+    [Parameter] public string CancelButtonCssClass { get; set; } = "button-cancel";
+    [Parameter] public string CancelButtonIconCssClass { get; set; } = "fa-solid fa-x";
+
+
+
+
 }

@@ -152,6 +152,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<CreateFaturaDto, Fatura>();
         CreateMap<UpdateFaturaDto, Fatura>()
             .ForMember(x => x.FaturaHareketler, y => y.Ignore());
+        CreateMap<SelectFaturaDto, CreateFaturaDto>();
+        CreateMap<SelectFaturaDto, UpdateFaturaDto>();
 
         //faturahareket
 
@@ -177,6 +179,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
                                                            z.Masraf != null ? z.Masraf.Ad :
                                                            null));
         CreateMap<FaturaHareketDto, FaturaHareket>();
+        CreateMap<SelectFaturaHareketDto, SelectFaturaHareketDto>();
+        CreateMap<SelectFaturaHareketDto, FaturaHareketDto>();
 
 
         //hizmet
@@ -241,6 +245,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.KasaAdi, y => y.MapFrom(z => z.Kasa.Ad))
             .ForMember(x => x.BankaHesapAdi, y => y.MapFrom(z => z.BankaHesap.Ad));
         CreateMap<MakbuzHareketDto, MakbuzHareket>();
+        CreateMap<SelectMakbuzHareketDto, SelectMakbuzHareketDto>();
+        CreateMap<SelectMakbuzHareketDto, MakbuzHareketDto>();
 
         //masraf
 

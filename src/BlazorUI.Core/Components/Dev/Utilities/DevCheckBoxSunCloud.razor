@@ -1,0 +1,45 @@
+﻿
+
+
+<DxCheckBox T="bool"
+            @bind-Checked="@Checked"
+            Alignment="Alignment"
+            LabelPosition="LabelPosition"
+            DisableDefaultRender="true">
+    <ChildContent>
+      
+<link rel="stylesheet" href="/_content/BlazorUI.Core/css/main.css" />
+        <div class="checkbox">
+            <input id="day-night-checkbox" type="
+             checkbox" class="checkbox_input">
+            <label for="day-night-checkbox" class="
+             checkbox_items">
+                <div class="checkbox_sun-moon">
+                </div>
+                <div class="checkbox_stars">
+                    <div class="checkbox_star"></div>
+                </div>
+                <div class="checkbox_cloud-body">
+                    <div class="checkbox_cloud"></div>
+                </div>
+            </label>
+        </div>
+    </ChildContent>
+</DxCheckBox>
+
+
+@code {
+    [Parameter] public bool Checked { get; set; } = true;
+    [Parameter] public CheckBoxContentAlignment Alignment { get; set; } = CheckBoxContentAlignment.Right;
+    [Parameter] public EventCallback<bool> CheckedChangedInvokeFunction { get; set; }
+    [Parameter] public LabelPosition LabelPosition { get; set; } = LabelPosition.Right;
+    [Parameter] public string TrueCaption { get; set; }
+    [Parameter] public string FalseCaption { get; set; }
+
+    
+    private async Task CheckedChanged(bool @checked)
+    {
+        Checked = @checked;
+        await CheckedChangedInvokeFunction.InvokeAsync(@checked);
+    }
+}

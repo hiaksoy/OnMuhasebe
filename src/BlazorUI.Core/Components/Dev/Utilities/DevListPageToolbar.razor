@@ -5,34 +5,34 @@
 
     <DxToolbarItem Click="NewButtonClick"
                    Enabled="NewButtonEnabled"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-file"
                    Text="@L["New"]"
                    Tooltip="@L["AddNewItem"]"
                    Visible="NewButtonVisible" />
 
     <DxToolbarItem Click="UpdateButtonClick"
                    Enabled="UpdateButtonEnabled"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-file-pen"
                    Text="@L["Update"]"
                    Tooltip="@L["UpdateSelectedItem"]"
                    Visible="UpdateButtonVisible" />
 
     <DxToolbarItem Click="DeleteButtonClick"
                    Enabled="DeleteButtonEnabled"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-trash-can"
                    Text="@L["Delete"]"
                    Tooltip="@L["DeleteSelectedItem"]"
                    Visible="DeleteButtonVisible" />
 
     <DxToolbarItem BeginGroup="true"
                    Click="ShowHideGroupPanel"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-table-cells-large"
                    Text="@L["Grouping"]"
                    Tooltip="@L["ShowGroupPanel"]"
                    Visible="GroupButtonVisible" />
 
     <DxToolbarItem Click="ShowHideFilterRow"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-filter"
                    Text="@L["Filtering"]"
                    Tooltip="@L["ShowFilterRow"]"
                    Visible="FilterButtonVisible" />
@@ -40,7 +40,7 @@
     <DxToolbarItem BeginGroup="true"
                    Click="PrintButtonClick"
                    Enabled="PrintButtonEnabled"
-                   IconCssClass="button-edit"
+                   IconCssClass="fa-solid fa-print"
                    Text="@L["Print"]"
                    Tooltip="@L["Print"]"
                    Visible="PrintButtonVisible" />
@@ -79,7 +79,7 @@
     [Parameter,EditorRequired] public IStringLocalizer L { get; set; }
 
     [Parameter] public bool ReserveButtonBeginGroup { get; set; } = true;
-    [Parameter] public string ReserveButtonIconCssClass { get; set; } = "button-edit";
+    [Parameter] public string ReserveButtonIconCssClass { get; set; } = "fa-solid fa-table-cells-large";
     [Parameter] public string ReserveButtonText { get; set; }
     [Parameter] public string ReserveButtonTooltip { get; set; }
 

@@ -1,5 +1,7 @@
 ﻿@typeparam TDataGridItem
 
+
+
 @if (!DataGridService.IsLoaded)
 {
     <CircleLoading Caption="@ListPageService.LoadingCaption"
@@ -10,7 +12,8 @@ else
 {
     if (!ListPageService.IsPopupListPage)
     {
-        <DevPageHeader Caption="@Caption"></DevPageHeader>
+        <DevPageHeader Caption="@Caption"
+                       TextAlign="@TextAlign"></DevPageHeader>
     }
 
     <DevGridLayout ColumnCount="ColumnCount"
@@ -36,6 +39,8 @@ else
     [Parameter, EditorRequired] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
     [Parameter, EditorRequired] public ICoreListPageService ListPageService { get; set; }
     [Parameter] public string Caption { get; set; }
+    [Parameter] public string TextAlign { get; set; }
+    [Parameter] public string CssClass { get; set; }
     [Parameter] public int RowCount { get; set; } = 1;
     [Parameter] public string RowSpacing { get; set; }
     [Parameter] public int ColumnCount { get; set; } = 1;

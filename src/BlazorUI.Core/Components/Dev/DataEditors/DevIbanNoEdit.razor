@@ -2,6 +2,7 @@
 
 <DxGridLayoutItem Column="ColumnIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
                   Row="RowIndex"
                   RowSpan="RowSpan"
                   Visible="Visible">
@@ -9,7 +10,9 @@
     <Template>
         <DxMaskedInput @ref="_dxMaskedInput"
                        @bind-Value="@Value"
+                       CssClass="@EditorCssClass"
                        Enabled="Enabled"
+                       InputCssClass="@InputCssClass"
                        Mask="LL00 0000 0000 0000 0000 0000 00"
                        ReadOnly="ReadOnly">
 
@@ -23,13 +26,17 @@
 
 <DevLabel Caption="@Caption"
           ColumnIndex="ColumnIndex-2"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
-          RowIndex="RowIndex">
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
 
 </DevLabel>
 

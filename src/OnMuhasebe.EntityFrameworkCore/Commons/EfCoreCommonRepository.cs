@@ -107,7 +107,7 @@ public class EfCoreCommonRepository<TEntity> : EfCoreRepository<OnMuhasebeDbCont
 
         var dbSet = await GetDbSetAsync();
         var maxCode = predicate == null ? await dbSet.MaxAsync(propetrySelector) : await dbSet.Where(predicate).MaxAsync(propetrySelector);
-        return maxCode == null ? "0000000000000001" : CreateNewCode(maxCode);
+        return maxCode == null ? "00001" : CreateNewCode(maxCode);
     }
     public async Task<IList<TEntity>> FromSqlRawAsync(string sql, params object[] parameters)
     {

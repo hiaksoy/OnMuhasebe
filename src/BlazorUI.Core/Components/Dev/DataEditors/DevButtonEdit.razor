@@ -4,6 +4,7 @@
 
 <DxGridLayoutItem Column="ColumnIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
                   Row="RowIndex"
                   RowSpan="RowSpan"
                   Visible="Visible">
@@ -13,12 +14,15 @@
                    @bind-Text="@Value"
                    @onkeydown="@KeyDownAsync"
                    @ondblclick="@ClickAsync"
+                   CssClass="@EditorCssClass"
                    Enabled="Enabled"
+                   InputCssClass="@InputCssClass"
                    NullText="@NullText"
                    ReadOnly="true"
                    ClearButtonDisplayMode="ClearButtonDisplayMode">
             <Buttons>
-                <DxEditorButton IconCssClass="button-edit-css"
+                <DxEditorButton IconCssClass="fa-solid fa-ellipsis"
+                                CssClass="button-edit"
                                 @onclick="@ClickAsync"
                                 @attributes="@Attributes" />
             </Buttons>
@@ -34,7 +38,7 @@
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
           RowIndex="RowIndex"
           Visible="Visible">

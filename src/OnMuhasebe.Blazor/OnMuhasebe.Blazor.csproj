@@ -15,6 +15,8 @@
     <UserSecretsId>OnMuhasebe-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
   </PropertyGroup>
 
+
+
   <ItemGroup>
     <PackageReference Include="Blazorise.Bootstrap5" Version="1.5.3" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.3" />
@@ -46,8 +48,6 @@
     <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="8.2.0" />
   </ItemGroup>
-
-
 
 
 </Project>

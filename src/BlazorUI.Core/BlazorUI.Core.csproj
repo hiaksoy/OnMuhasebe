@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
@@ -25,8 +26,8 @@
 		<Folder Include="Components\Dev\Templates\" />
 		<Folder Include="wwwroot\images\" />
 		<Folder Include="wwwroot\js\" />
-		<Folder Include="wwwroot\css\" />
 	</ItemGroup>
+
 
 
 </Project>

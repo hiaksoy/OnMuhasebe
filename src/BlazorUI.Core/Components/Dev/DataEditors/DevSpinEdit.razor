@@ -2,6 +2,7 @@
 
 <DxGridLayoutItem Column="ColumnIndex"
                   ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
                   Row="RowIndex"
                   RowSpan="RowSpan"
                   Visible="Visible">
@@ -10,7 +11,9 @@
         <DxSpinEdit @ref="_dxSpinEdit"
                     @bind-Value="@Value"
                     AllowMouseWheel="true"
+                    CssClass="@EditorCssClass"
                     Enabled="Enabled"
+                    InputCssClass="@InputCssClass"
                     Mask="@NumericMask.WholeNumber"
                     MinValue="MinValue"
                     MaxValue="MaxValue"
@@ -27,7 +30,7 @@
 
 </DevLabel>
 
-<DevLabel Caption="@SeperateCaption"
+<DevLabel Caption="@SeparateCaption"
           ColumnIndex="ColumnIndex-1"
           RowIndex="RowIndex">
 
@@ -40,6 +43,7 @@
 
     [Parameter] public int MaxValue { get; set; } = 100;
     [Parameter] public int MinValue { get; set; } = 0;
+    [Parameter] public override string EditorCssClass { get; set; } = "number";
     [Parameter] public EventCallback<int> ValueChanged { get; set; }
 
     [Parameter]

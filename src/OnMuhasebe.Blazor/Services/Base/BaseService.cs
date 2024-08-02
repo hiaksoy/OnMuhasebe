@@ -55,9 +55,6 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
         }
     }
 
-
-
-
     #endregion
 
 
@@ -136,5 +133,11 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     }
 
     public virtual void ButtonEditDeleteKeyDown(IEntityDto entity, string fieldName) { }
- 
+
+    public void SetDataRowSelected(bool first)
+    {
+        ((DxDataGrid<TDataGridItem>)DataGrid).SetDataRowSelected(first ? ListDataSource.FirstOrDefault():ListDataSource.LastOrDefault(),true);
+    }
+
+    public virtual void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged) { }
 }
