@@ -68,7 +68,7 @@
     "Warehouse": "Depo",
     "Quantity": "Miktar",
     "ReceiptType": "Makbuz Türü",
-    "ReceiptNumber": "Makbuz Numarası",
+    "ReceiptNumber": "Makbuz No",
     "Cash": "Kasa",
     "BankAccount": "Banka Hesabı",
     "CheckTotal": "Çek Toplamı",
@@ -225,7 +225,24 @@
     "EnterTrackingNo": "Takip No Girin",
     "EnterDocumentNumber": "Belge No Girin",
     "EnterPrincipalDebtor": "Asıl Borçlu Girin",
-    "EnterEndorser": "Ciranta Girin"
-
+    "EnterEndorser": "Ciranta Girin",
+    "MeansOfPayment": "Ödeme Belgesi",
+    "OurOwn": "Kendimizin",
+    "DocumentState": "Belge Durumu",
+    "PaymentReceiptCard": "Ödeme Makbuzu Kartı",
+    "PaymentReceiptCards": "Ödeme Makbuzu Kartları",
+    "NewDocument": "Yeni Belge",
+    "Endorsement": "Ciro Etme",
+    "ChooseTransactionType": "İşlem Türünü Seç",
+    "CashTransactionReceiptCard": "Kasa İşlem Makbuzu Kartı",
+    "CashTransactionReceiptCards": "Kasa İşlem Makbuzu Kartları",
+    "CashAccountCards": "Kasa Hesap Kartları",
+    "BankTransactionReceiptCard": "Banka İşlem Makbuzu Kartı",
+    "BankTransactionReceiptCards": "Banka İşlem Makbuzu Kartları",
+    "CardTransactions": "Kart Hareketleri",
+    "ShowTransactionForThisCard": "Bu kartın Hareketlerini Göster",
+    "BankAccountCardTransActions": "Banka Hesap Kartı Hareketleri",
+    "NotAuthorized": "Bu Sayfaya Erişim Yetkiniz yoktur...",
+    "NothingAddress" : "Malesef böyle bir adres bulunamadı"
   }
 }

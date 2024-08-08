@@ -1,5 +1,6 @@
 ﻿using OnMuhasebe.BankaHesaplar;
 using OnMuhasebe.Cariler;
+using OnMuhasebe.Entities.OdemeBelgeleri;
 using OnMuhasebe.Faturalar;
 using OnMuhasebe.MakbuzHareketler;
 using OnMuhasebe.Makbuzlar;
@@ -1114,4 +1115,8 @@ public static class OnMuhasebeDbContextModelBuilderExtensions
             //relations
         });
     }
-}
+    public static void ConfigureStoredProcedure(this ModelBuilder builder)
+    {
+        builder.Entity<OdemeBelgesi>();
+    }
+ }

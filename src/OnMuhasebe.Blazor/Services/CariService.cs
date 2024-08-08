@@ -16,6 +16,11 @@ public class CariService : BaseService<ListCariDto, SelectCariDto>, IScopedDepen
                 fatura.CariId = SelectedItem.Id;
                 fatura.CariAdi = SelectedItem.Ad;
                 break;
+
+            case SelectMakbuzDto makbuz:
+                makbuz.CariId = SelectedItem.Id;
+                makbuz.CariAdi = SelectedItem.Ad;
+                break;
         }
     }
 }

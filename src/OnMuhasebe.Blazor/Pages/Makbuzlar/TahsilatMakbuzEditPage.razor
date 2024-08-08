@@ -10,7 +10,7 @@
 <DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
                         EditPageService="Service"
                         Caption="@L["ReceiptCard"]"
-                        Height="870px"
+                        Height="845px"
                         ListPageService="Service"
                         OnSubmit="OnSubmit"
                         SubmitButtonText="@L["Save"]"
@@ -105,7 +105,7 @@
                                                            MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Senet" />
 
                         <DxDataGridColumn Caption="@L["CashAccount"]"
-                                          Field="@nameof(SelectMakbuzHareketDto.KasaId)"
+                                          Field="@nameof(SelectMakbuzHareketDto.KasaAdi)"
                                           Width="200px"
                                           Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Nakit" />
 
@@ -113,7 +113,7 @@
                                           Field="@nameof(SelectMakbuzHareketDto.BankaHesapAdi)"
                                           Width="200px"
                                           Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Banka ||
-                                                           MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Pos" />
+                                                   MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Pos" />
 
 
                         <DxDataGridSpinEditColumn Caption="@L["Amount"]"
@@ -202,7 +202,7 @@
                                                  RowIndex="2"
                                                  @bind-Value="Service.DataSource.CekToplam" />
 
-                                <DevCurrencyEdit Caption="@L["BillOfExcahngeTotal"]"
+                                <DevCurrencyEdit Caption="@L["BillOfExchangeTotal"]"
                                                  ColumnIndex="6"
                                                  Enabled="false"
                                                  RowIndex="2"

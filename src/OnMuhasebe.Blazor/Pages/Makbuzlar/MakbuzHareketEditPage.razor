@@ -323,7 +323,7 @@
 {
     <DevPopupListPageLayout DataGridService="BankaSubeService"
                             CancelButtonText="@L["Cancel"]"
-                            Caption="@L["BankBrachCards"]"
+                            Caption="@($"{L["BankBranchCards"]} ( {Service.TempDataSource.CekBankaAdi} ) ")"
                             Closed="BankaSubeService.HideListPage"
                             SelectButtonInvokeFunction="(()=>{BankaSubeService.SelectEntity(Service.TempDataSource);})"
                             SelectButtonText="@L["Select"]"

@@ -9,3 +9,5 @@ global using OnMuhasebe.Consts;
 global using FluentValidation;
 global using Microsoft.Extensions.Localization;
 global using OnMuhasebe.Makbuzlar;
+global using OnMuhasebe.MakbuzHareketler;
+global using Volo.Abp.Application.Dtos;

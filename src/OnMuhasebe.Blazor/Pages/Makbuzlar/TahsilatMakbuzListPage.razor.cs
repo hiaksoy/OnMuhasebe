@@ -5,7 +5,7 @@ namespace OnMuhasebe.Blazor.Pages.Makbuzlar;
 
 public partial class TahsilatMakbuzListPage
 {
-    public AppService AppService { get; set; }
+    public AppService? AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
         Service.ListDataSource = (await GetListAsync(new MakbuzListParameterDto
@@ -35,7 +35,7 @@ public partial class TahsilatMakbuzListPage
             SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
             DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId,
             Durum = Service.IsActiveCards,
-            MakbuzHareketler = new List<MakbuzHareketler.SelectMakbuzHareketDto>()
+            MakbuzHareketler = new List<SelectMakbuzHareketDto>()
         };
         Service.ShowEditPage();
 

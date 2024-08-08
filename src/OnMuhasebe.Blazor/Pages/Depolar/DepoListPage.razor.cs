@@ -4,7 +4,7 @@ namespace OnMuhasebe.Blazor.Pages.Depolar;
 
 public partial class DepoListPage
 {
-    public AppService AppService { get; set; }
+    public AppService? AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
         Service.ListDataSource = (await GetListAsync(new DepoListParameterDto

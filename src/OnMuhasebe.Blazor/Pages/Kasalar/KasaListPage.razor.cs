@@ -4,7 +4,7 @@ namespace OnMuhasebe.Blazor.Pages.Kasalar;
 
 public partial class KasaListPage
 {
-    public AppService AppService { get; set; }
+    public AppService? AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
         Service.ListDataSource = (await GetListAsync(new KasaListParameterDto

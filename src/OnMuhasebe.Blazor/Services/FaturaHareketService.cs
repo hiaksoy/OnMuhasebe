@@ -9,8 +9,8 @@ namespace OnMuhasebe.Blazor.Services;
 
 public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>, IScopedDependency
 {
-    public AppService AppService { get; set; }
-    public FaturaService FaturaService { get; set; }
+    public AppService? AppService { get; set; }
+    public FaturaService? FaturaService { get; set; }
     public override void BeforeInsert()
     {
         DataSource = new SelectFaturaHareketDto

@@ -7,8 +7,13 @@ public class KasaService : BaseService<ListKasaDto, SelectKasaDto> , IScopedDepe
         switch (targetEntity)
         {
             case SelectMakbuzHareketDto makbuzHareket:
-                makbuzHareket.CekBankaId = SelectedItem.Id;
-                makbuzHareket.CekBankaAdi = SelectedItem.Ad;
+                makbuzHareket.KasaId = SelectedItem.Id;
+                makbuzHareket.KasaAdi = SelectedItem.Ad;
+                break;
+
+            case SelectMakbuzDto makbuz:
+                makbuz.KasaId = SelectedItem.Id;
+                makbuz.KasaAdi = SelectedItem.Ad;
                 break;
         }
     }

@@ -1,5 +1,5 @@
 ﻿namespace OnMuhasebe.Makbuzlar;
-public enum BelgeDurumu
+public enum BelgeDurumu : byte
 {
     Portfoyde = 1,
     Odenecek = 2,

@@ -12,5 +12,5 @@ public class ListDepoDto : EntityDto<Guid>
     public decimal Giren { get; set; }
     public decimal Cikan { get; set; }
     public decimal Mevcut => Giren - Cikan;
-    public ICollection<SelectFaturaHareketDto> FaturaHareketler { get; set; }
+    public ICollection<SelectFaturaHareketDto>? FaturaHareketler { get; set; }
 }

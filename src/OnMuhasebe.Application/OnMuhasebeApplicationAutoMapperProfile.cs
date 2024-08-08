@@ -18,6 +18,7 @@ using OnMuhasebe.Entities.Hizmetler;
 using OnMuhasebe.Entities.Kasalar;
 using OnMuhasebe.Entities.Makbuzlar;
 using OnMuhasebe.Entities.Masraflar;
+using OnMuhasebe.Entities.OdemeBelgeleri;
 using OnMuhasebe.Entities.OzelKodlar;
 using OnMuhasebe.Entities.Parametreler;
 using OnMuhasebe.Entities.Stoklar;
@@ -29,6 +30,7 @@ using OnMuhasebe.Kasalar;
 using OnMuhasebe.MakbuzHareketler;
 using OnMuhasebe.Makbuzlar;
 using OnMuhasebe.Masraflar;
+using OnMuhasebe.OdemeBelgeleri;
 using OnMuhasebe.OzelKodlar;
 using OnMuhasebe.Parametreler;
 using OnMuhasebe.Stoklar;
@@ -236,6 +238,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<UpdateMakbuzDto, Makbuz>()
             .ForMember(x => x.MakbuzTuru, y => y.Ignore())
             .ForMember(x => x.MakbuzHareketler, y => y.Ignore());
+        CreateMap<SelectMakbuzDto, CreateMakbuzDto>();
+        CreateMap<SelectMakbuzDto, UpdateMakbuzDto>();
 
         //makbuzhareket
 
@@ -247,6 +251,14 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<MakbuzHareketDto, MakbuzHareket>();
         CreateMap<SelectMakbuzHareketDto, SelectMakbuzHareketDto>();
         CreateMap<SelectMakbuzHareketDto, MakbuzHareketDto>();
+
+        CreateMap<MakbuzHareket, ListOdemeBelgesiHareketDto>()
+            .ForMember(x => x.MakbuzNo, y => y.MapFrom(z => z.Makbuz.MakbuzNo))
+            .ForMember(x => x.Tarih, y => y.MapFrom(z => z.Makbuz.Tarih))
+            .ForMember(x => x.MakbuzTuru, y => y.MapFrom(z => z.Makbuz.MakbuzTuru))
+            .ForMember(x => x.Aciklama, y => y.MapFrom(z => string.IsNullOrEmpty(z.Makbuz.Aciklama) ? z.Aciklama : z.Makbuz.Aciklama));
+
+
 
         //masraf
 
@@ -264,6 +276,12 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<UpdateMasrafDto, Masraf>();
         CreateMap<SelectMasrafDto, CreateMasrafDto>();
         CreateMap<SelectMasrafDto, UpdateMasrafDto>();
+
+        //odemeBelgesi
+
+        CreateMap<OdemeBelgesi, ListOdemeBelgesiDto>();
+        CreateMap<ListOdemeBelgesiDto, SelectMakbuzHareketDto>();
+
 
         //ozelkod
 

@@ -68,6 +68,10 @@ public class OnMuhasebeDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+
+        /* Configure your own tables/entities inside here */
+
+        builder.ConfigureStoredProcedure();
         builder.ConfigureBanka();
         builder.ConfigureBankaSube();
         builder.ConfigureBankaHesap();
@@ -86,10 +90,6 @@ public class OnMuhasebeDbContext :
         builder.ConfigureOzelKod();
         builder.ConfigureStok();
         builder.ConfigureSube();
-
-
-        /* Configure your own tables/entities inside here */
-
 
     }
 }

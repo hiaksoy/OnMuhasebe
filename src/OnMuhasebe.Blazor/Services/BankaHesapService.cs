@@ -19,6 +19,11 @@ public class BankaHesapService : BaseService<ListBankaHesapDto, SelectBankaHesap
                 makbuzHareket.BankaHesapId = SelectedItem.Id;
                 makbuzHareket.BankaHesapAdi = SelectedItem.Ad;
                 break;
+
+            case SelectMakbuzDto makbuz:
+                makbuz.BankaHesapId = SelectedItem.Id;
+                makbuz.BankaHesapAdi = SelectedItem.Ad;
+                break;
         }
     }
 }

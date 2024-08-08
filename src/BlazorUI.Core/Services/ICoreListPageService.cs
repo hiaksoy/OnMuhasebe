@@ -14,7 +14,9 @@ public interface ICoreListPageService
     public string LoadingText { get; }
     public bool IsPopupListPage { get; set; }
     public bool EditPageVisible { get; set; }
-
+    public string SelectedReportName { get; set; }
+    public string BaseReportFolder { get; set; }
+    public string ReportFolder { get; set; }
     void ShowEditPage();
     void HideEditPage();
     void HideListPage();

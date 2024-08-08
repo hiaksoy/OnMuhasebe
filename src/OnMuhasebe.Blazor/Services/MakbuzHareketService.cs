@@ -6,8 +6,8 @@ namespace OnMuhasebe.Blazor.Services;
 
 public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, IScopedDependency
 {
-    public AppService AppService { get; set; }
-    public MakbuzService MakbuzService { get; set; }
+    public AppService? AppService { get; set; }
+    public MakbuzService? MakbuzService { get; set; }
 
     public override void BeforeUpdate()
     {

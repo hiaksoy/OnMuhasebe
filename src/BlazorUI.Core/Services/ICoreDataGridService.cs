@@ -11,11 +11,12 @@ public interface ICoreDataGridService<TDataGridItem>
     public bool SelectFirstDataRow { get; set; }
     public bool IsLoaded { get; set; }
     public Guid PopupListPageFocusedRowId { get; set; }
-
+    public IList<string> ExcludeListItems { get; set; }
 
     void ShowListPage(bool firstRender);
     void SetDataRowSelected(TDataGridItem item);
     void SetDataRowSelected(bool first);
     void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged);
+    void AddSelectedItems();
 
 }

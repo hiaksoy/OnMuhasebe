@@ -15,20 +15,20 @@ namespace OnMuhasebe.Blazor.Services.Base;
 public abstract class BaseHareketService<TDataGridItem> : ICoreHareketService<TDataGridItem>
 {
     
-    public IUiMessageService MessageService { get; set; }
-    public IGuidGenerator GuidGenerator { get; set; }
-    public IStringLocalizerFactory StringLocalizerFactory { get; set; }
-    public ComponentBase DataGrid { get ; set ; }
-    public IList<TDataGridItem> ListDataSource { get ; set ; }
-    public TDataGridItem SelectedItem { get ; set ; }
-    public IEnumerable<TDataGridItem> SelectedItems { get ; set ; }
+    public IUiMessageService? MessageService { get; set; }
+    public IGuidGenerator? GuidGenerator { get; set; }
+    public IStringLocalizerFactory? StringLocalizerFactory { get; set; }
+    public ComponentBase? DataGrid { get ; set ; }
+    public IList<TDataGridItem>? ListDataSource { get ; set ; }
+    public TDataGridItem? SelectedItem { get ; set ; }
+    public IEnumerable<TDataGridItem>? SelectedItems { get ; set ; }
     public bool ShowFilterRow { get ; set ; }
     public bool ShowGroupPanel { get ; set ; }
     public bool ShowSelectionCheckBox { get ; set ; }
     public bool SelectFirstDataRow { get ; set ; }
     public bool IsLoaded { get ; set ; }
     public Guid PopupListPageFocusedRowId { get ; set ; }
-    public TDataGridItem DataSource { get ; set ; }
+    public TDataGridItem? DataSource { get ; set ; }
     public bool ToolbarCheckBoxVisible { get ; set ; }
     public bool IsActiveCards { get ; set ; }
 
@@ -38,13 +38,14 @@ public abstract class BaseHareketService<TDataGridItem> : ICoreHareketService<TD
 
     public bool IsPopupListPage { get ; set ; }
     public bool EditPageVisible { get ; set ; }
-    public Action HasChanged { get ; set ; }
-    public ComponentBase ActiveEditComponent { get ; set ; }
-    public TDataGridItem TempDataSource { get; set; }
+    public Action? HasChanged { get ; set ; }
+    public ComponentBase? ActiveEditComponent { get ; set ; }
+    public TDataGridItem? TempDataSource { get; set; }
+    public IList<string> ExcludeListItems { get; set; }
 
 
 
-    private IStringLocalizer _localizer;
+    private IStringLocalizer? _localizer;
     public IStringLocalizer L
     {
         get
@@ -56,7 +57,9 @@ public abstract class BaseHareketService<TDataGridItem> : ICoreHareketService<TD
         }
     }
 
-
+    public string SelectedReportName { get; set; }
+    public string BaseReportFolder { get; set; }
+    public string ReportFolder { get; set; }
 
     public void BeforeShowPopupListPage(params object[] prm)
     {
@@ -167,4 +170,9 @@ public abstract class BaseHareketService<TDataGridItem> : ICoreHareketService<TD
     }
 
     public virtual void Hesapla(object value, string propertyName) {  }
+
+    public void AddSelectedItems()
+    {
+        throw new NotImplementedException();
+    }
 }
