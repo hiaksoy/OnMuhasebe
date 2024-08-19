@@ -53,12 +53,10 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
         }
     }
 
-    public string SelectedReportName { get; set; }
-    public string BaseReportFolder { get; set; } = nameof(Reports);
-    public string ReportFolder { get; set; }
-
-
-
+    public bool IsGrantedDefault { get; set; }
+    public bool IsGrantedCreate { get; set; }
+    public bool IsGrantedUpdate { get; set; }
+    public bool IsGrantedDelete { get; set; }
 
     public async Task ConfirmMessage(string message, Action action, string title = null)
     {

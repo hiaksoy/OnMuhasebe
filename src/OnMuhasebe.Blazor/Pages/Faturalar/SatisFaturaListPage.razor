@@ -1,6 +1,6 @@
 ﻿@page "/salesinvoicecards"
 
-
+@attribute [Authorize(OnMuhasebePermissions.Fatura.Default)]
 @inherits BaseListPage<SelectFaturaDto,ListFaturaDto,FaturaListParameterDto,CreateFaturaDto,UpdateFaturaDto,FaturaNoParameterDto>
 @inject FaturaAppService CrudService
 @inject FaturaService Service
@@ -136,5 +136,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Fatura.Default;
+    CreatePolicy = OnMuhasebePermissions.Fatura.Create;
+    UpdatePolicy = OnMuhasebePermissions.Fatura.Update;
+    DeletePolicy = OnMuhasebePermissions.Fatura.Delete;
     }
 }

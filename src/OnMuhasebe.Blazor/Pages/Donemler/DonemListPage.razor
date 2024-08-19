@@ -1,7 +1,7 @@
 ﻿@page "/periodcards"
 
 
-
+@attribute [Authorize(OnMuhasebePermissions.Donem.Default)]
 @inherits BaseListPage<SelectDonemDto,ListDonemDto,DonemListParameterDto,CreateDonemDto,UpdateDonemDto,CodeParameterDto>
 
 @inject DonemAppService CrudService
@@ -62,5 +62,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Donem.Default;
+    CreatePolicy = OnMuhasebePermissions.Donem.Create;
+    UpdatePolicy = OnMuhasebePermissions.Donem.Update;
+    DeletePolicy = OnMuhasebePermissions.Donem.Delete;
     }
 }

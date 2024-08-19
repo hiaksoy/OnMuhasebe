@@ -1,9 +1,6 @@
-﻿using OnMuhasebe.Entities.OzelKodlar;
-using OnMuhasebe.OzelKodlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.OzelKodlar;
 
-namespace OnMuhasebe.AppServices.OzelKodlar;
+[Authorize(OnMuhasebePermissions.OzelKod.Default)]
 public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
 {
     private readonly IOzelKodRepository _ozelKodRepository;
@@ -15,6 +12,7 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
         _ozelKodManager = ozelKodManager;
     }
 
+    [Authorize(OnMuhasebePermissions.OzelKod.Create)]
     public virtual async Task<SelectOzelKodDto> CreateAsync(CreateOzelKodDto input)
     {
         await _ozelKodManager.CheckCreateAsync(input.Kod, input.KodTuru, input.KartTuru);
@@ -24,6 +22,8 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
 
     }
 
+
+    [Authorize(OnMuhasebePermissions.OzelKod.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _ozelKodManager.CheckDeleteAsync(id);
@@ -52,6 +52,8 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
 
     }
 
+
+    [Authorize(OnMuhasebePermissions.OzelKod.Update)]
     public virtual async Task<SelectOzelKodDto> UpdateAsync(Guid id, UpdateOzelKodDto input)
     {
         var entity = await _ozelKodRepository.GetAsync(id, x => x.Id == id);

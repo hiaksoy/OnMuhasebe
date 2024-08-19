@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Hizmetler;
-using OnMuhasebe.Hizmetler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Hizmetler;
 
-namespace OnMuhasebe.AppServices.Hizmetler;
+[Authorize(OnMuhasebePermissions.Hizmet.Default)]
 public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
 {
     private readonly IHizmetRepository _hizmetRepository;
@@ -16,6 +12,8 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
         _hizmetManager = hizmetManager;
     }
 
+
+    [Authorize(OnMuhasebePermissions.Hizmet.Create)]
     public virtual async Task<SelectHizmetDto> CreateAsync(CreateHizmetDto input)
     {
         await _hizmetManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id, input.OzelKod2Id);
@@ -26,6 +24,7 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Hizmet.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _hizmetManager.CheckDeleteAsync(id);
@@ -51,6 +50,7 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
         return new PagedResultDto<ListHizmetDto>(totalCount, mappedDtos);
     }
 
+    [Authorize(OnMuhasebePermissions.Hizmet.Update)]
     public virtual async Task<SelectHizmetDto> UpdateAsync(Guid id, UpdateHizmetDto input)
     {
         var entity = await _hizmetRepository.GetAsync(id, x => x.Id == id);

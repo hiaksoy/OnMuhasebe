@@ -7,13 +7,17 @@ public partial class KasaListPage
     public AppService? AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
-        Service.ListDataSource = (await GetListAsync(new KasaListParameterDto
+        var listDataSource = (await GetListAsync(new KasaListParameterDto
         {
             SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
             Durum = Service.IsActiveCards
-        })).Items.ToList();
+        }))?.Items.ToList();
 
         Service.IsLoaded = true;
+
+
+        if (listDataSource != null)
+            Service.ListDataSource = listDataSource;
     }
 
     protected override async Task BeforeInsertAsync()

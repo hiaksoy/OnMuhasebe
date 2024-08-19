@@ -1,5 +1,6 @@
 ﻿@page "/meansofpayments"
 
+@attribute [Authorize(OnMuhasebePermissions.OdemeBelgesi.Default)]
 @inherits BaseListPage<SelectMakbuzHareketDto,ListOdemeBelgesiDto,OdemeBelgesiListParameterDto,MakbuzHareketDto,MakbuzHareketDto,MakbuzNoParameterDto>
 @inject OdemeBelgesiAppService CrudService
 @inject OdemeBelgesiService Service
@@ -110,5 +111,7 @@
   {
     BaseCrudService = CrudService;
     BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.OdemeBelgesi.Default;
   }
 }

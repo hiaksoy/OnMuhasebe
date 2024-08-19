@@ -1,6 +1,5 @@
 ﻿@page "/bankaccountcards"
-@using OnMuhasebe.AppServices.BankaHesaplar
-
+@attribute [Authorize(OnMuhasebePermissions.BankaHesap.Default)]
 @inherits BaseListPage<SelectBankaHesapDto,ListBankaHesapDto,BankaHesapListParameterDto,CreateBankaHesapDto,UpdateBankaHesapDto,BankaHesapCodeParameterDto>
 
 @inject BankaHesapAppService CrudService
@@ -28,12 +27,6 @@
                             L="L"
                             NewButtonClick="async()=> await BeforeInsertAsync()"
                             NewButtonVisible="true"
-                            ReserveButtonBeginGroup="true"
-                            ReserveButtonClick="()=>OdemeBelgesiHareketService.BeforeShowPopupListPage(OdemeTuru.Banka,Service.SelectedItem.Id)"
-                            ReserveButtonEnabled="Service.ListDataSource.Count>0"
-                            ReserveButtonText="@L["CardTransactions"]"
-                            ReserveButtonTooltip="@L["ShowTransactionForThisCard"]"
-                            ReserveButtonVisible="true"
                             UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
                             UpdateButtonEnabled="Service.ListDataSource.Count > 0"
                             UpdateButtonVisible="true">
@@ -134,5 +127,11 @@
   {
     BaseCrudService = CrudService;
     BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.BankaHesap.Default;
+    CreatePolicy = OnMuhasebePermissions.BankaHesap.Create;
+    UpdatePolicy = OnMuhasebePermissions.BankaHesap.Update;
+    DeletePolicy = OnMuhasebePermissions.BankaHesap.Delete;
+
   }
 }

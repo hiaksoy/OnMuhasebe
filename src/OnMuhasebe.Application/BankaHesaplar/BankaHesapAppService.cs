@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.BankaHesaplar;
-using OnMuhasebe.Entities.BankaHesaplar;
-using OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.BankaHesaplar;
 
-namespace OnMuhasebe.AppServices.BankaHesaplar;
+[Authorize(OnMuhasebePermissions.BankaHesap.Default)]
 public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
 {
     private readonly IBankaHesapRepository _bankaHesapRepository;
@@ -16,6 +12,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
         _bankaHesapManager = bankaHesapManager;
     }
 
+    [Authorize(OnMuhasebePermissions.BankaHesap.Create)]
     public virtual async Task<SelectBankaHesapDto> CreateAsync(CreateBankaHesapDto input)
     {
         await _bankaHesapManager.CheckCreateAsync(input.Kod, input.BankaSubeId, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -25,6 +22,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.BankaHesap.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaHesapManager.CheckDeleteAsync(id);
@@ -68,6 +66,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.BankaHesap.Update)]
     public virtual async Task<SelectBankaHesapDto> UpdateAsync(Guid id, UpdateBankaHesapDto input)
     {
         var entity = await _bankaHesapRepository.GetAsync(id,x => x.Id == id);

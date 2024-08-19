@@ -1,5 +1,6 @@
 ﻿@page "/banktransactionreceiptcards"
 
+@attribute [Authorize(OnMuhasebePermissions.Makbuz.Default)]
 @inherits BaseListPage<SelectMakbuzDto,ListMakbuzDto,MakbuzListParameterDto,CreateMakbuzDto,UpdateMakbuzDto,MakbuzNoParameterDto>
 @inject MakbuzAppService CrudService
 @inject MakbuzService Service
@@ -124,5 +125,10 @@
     Service.MakbuzTuru = MakbuzTuru.BankaIslem;
     BaseCrudService = CrudService;
     BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Makbuz.Default;
+    CreatePolicy = OnMuhasebePermissions.Makbuz.Create;
+    UpdatePolicy = OnMuhasebePermissions.Makbuz.Update;
+    DeletePolicy = OnMuhasebePermissions.Makbuz.Delete;
   }
 }

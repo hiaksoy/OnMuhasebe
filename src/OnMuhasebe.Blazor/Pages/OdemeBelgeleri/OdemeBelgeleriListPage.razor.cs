@@ -14,7 +14,7 @@ public partial class OdemeBelgeleriListPage
             Service.OdemeTurleri = $"{(byte)OdemeTuru.Cek}, {(byte)OdemeTuru.Senet}, {(byte)OdemeTuru.Pos}";
             Service.KendiBelgemiz = false;
         }
-        Service.ListDataSource = (await GetListAsync(new OdemeBelgesiListParameterDto 
+        var listDataSource = (await GetListAsync(new OdemeBelgesiListParameterDto 
         {
             Sql = Service.MakbuzService.MakbuzTuru == MakbuzTuru.BankaIslem ||
                   Service.MakbuzService.MakbuzTuru == MakbuzTuru.KasaIslem ?
@@ -27,7 +27,10 @@ public partial class OdemeBelgeleriListPage
             KendiBelgemiz = Service.KendiBelgemiz,
             OdemeTurleri = Service.OdemeTurleri
 
-        })).Items.ToList();
+        }))?.Items.ToList();
+        
+        if (listDataSource != null)
+            Service.ListDataSource = listDataSource;
 
         foreach (var item in Service.ExcludeListItems)
         {
@@ -37,5 +40,6 @@ public partial class OdemeBelgeleriListPage
 
         Service.ExcludeListItems = null;
         Service.IsLoaded = true;
+
     }
 }

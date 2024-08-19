@@ -1,9 +1,6 @@
-﻿using OnMuhasebe.Entities.Kasalar;
-using OnMuhasebe.Kasalar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Kasalar;
 
-namespace OnMuhasebe.AppServices.Kasalar;
+[Authorize(OnMuhasebePermissions.Kasa.Default)]
 public class KasaAppService : OnMuhasebeAppService, IKasaAppService
 {
     private readonly IKasaRepository _kasaRepository;
@@ -15,6 +12,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
         _kasaManager = kasaManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Kasa.Create)]
     public virtual async Task<SelectKasaDto> CreateAsync(CreateKasaDto input)
     {
         await _kasaManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -24,6 +22,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Kasa.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _kasaManager.CheckDeleteAsync(id);
@@ -49,6 +48,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
         return new PagedResultDto<ListKasaDto>(totalCount, mappedDtos);
     }
 
+    [Authorize(OnMuhasebePermissions.Kasa.Update)]
     public virtual async Task<SelectKasaDto> UpdateAsync(Guid id, UpdateKasaDto input)
     {
         var entity = await _kasaRepository.GetAsync(id, x => x.Id == id);

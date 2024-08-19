@@ -9,15 +9,18 @@ public partial class SatisFaturaListPage
     public AppService AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
-        Service.ListDataSource = (await GetListAsync(new FaturaListParameterDto
+        var listDataSource = (await GetListAsync(new FaturaListParameterDto
         {
             FaturaTuru = FaturaTuru.Satis,
             SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
             DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId,
             Durum = Service.IsActiveCards
-        })).Items.ToList();
+        }))?.Items.ToList();
 
         Service.IsLoaded = true;
+
+        if (listDataSource != null)
+            Service.ListDataSource = listDataSource;
     }
 
     protected override async Task BeforeInsertAsync()

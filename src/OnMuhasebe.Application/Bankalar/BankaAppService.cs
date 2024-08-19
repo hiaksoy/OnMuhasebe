@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.Bankalar;
-using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Bankalar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Bankalar;
 
-namespace OnMuhasebe.AppServices.Bankalar;
+[Authorize(OnMuhasebePermissions.Banka_.Default)]
 public class BankaAppService : OnMuhasebeAppService, IBankaAppService
 {
     private readonly IBankaRepository _bankaRepository;
@@ -16,6 +12,7 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         _bankaManager = bankaManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Banka_.Create)]
     public virtual async Task<SelectBankaDto> CreateAsync(CreateBankaDto input)
     {
         await _bankaManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
@@ -24,6 +21,7 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         return ObjectMapper.Map<Banka, SelectBankaDto>(entity);
     }
 
+    [Authorize(OnMuhasebePermissions.Banka_.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaManager.CheckDeleteAsync(id);
@@ -50,6 +48,7 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         return new PagedResultDto<ListBankaDto>(totalCount, ObjectMapper.Map<List<Banka>, List<ListBankaDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Banka_.Update)]
     public virtual async Task<SelectBankaDto> UpdateAsync(Guid id, UpdateBankaDto input)
     {
         var entity = await _bankaRepository.GetAsync(id, b => b.Id == id);

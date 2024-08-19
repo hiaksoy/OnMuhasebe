@@ -1,87 +1,271 @@
 ﻿@page "/"
-@using BlazorUI.Core.Components.Dev.Layouts
-@using BlazorUI.Core.Components.Dev.DataEditors
-@using BlazorUI.Core.Helpers
-@using BlazorUI.Core.Models
-@using Microsoft.Extensions.Localization
-@using OnMuhasebe.BankaHesaplar
-@using OnMuhasebe.Localization
+@using OnMuhasebe.Raporlar
+
+@inject AppService AppService
+@inject ICurrentUser CurrentUser
+@inject FirmaParametreAppService FirmaParametreAppService
 
 @inject IStringLocalizer<OnMuhasebeResource> L
 
+<AuthorizeView>
+  <Authorized>
+    @if (_isShowFirmaParametre)
+    {
+      <SubeDonemSecimEditPage />
+    }
+    else
+    {
+      AppService.HasChanged();
+    }
 
-<DevGridLayout ColumnCount="5"
-               ColumnSpacing="3px"
-               RowCount="10"
-               RowSpacing="3px"
-               ColumnWidths="@(new[]{"100px","5px","300px"})">
+    <h4 class="pt-4 pb-4" style="text-align:center;font-weight:bold;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">@L["FinancialStatusSummary"]</h4>
 
-    <GridLayoutItems>
+    <DevGridLayout ColumnCount="5"
+                   ColumnWidths="@ColumnWidths("*","10px","*","10px","*")"
+                   RowCount="3"
+                   RowHeights="@RowHeights("*","10px","*")">
 
-        <DevTextEdit Caption="Adı Soyadı"
-                     ColumnIndex="2"
-                     RowIndex="0"
-                     NullText="Değer Girin..."
-                     IsFocus="true" />
+      <GridLayoutItems>
+        <DxGridLayoutItem Column="0"
+                          Row="0">
+          <Template>
+            <div class="card">
+              <DxChart Data="KasaDurum">
+                <DxChartTitle Text="@L["CashStatusChart"]" />
+                <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
+                               Orientation="DevExpress.Blazor.Orientation.Vertical"
+                               Position="RelativePosition.Outside"
+                               VerticalAlignment="VerticalEdge.Top" />
+                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+                                  ValueField="@((FinansalDurumDto x)=> x.Tutar)">
+                  <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
+                                      Visible="true" />
 
-        <DevTelEdit Caption="Telefon"
-                    ColumnIndex="2"
-                    RowIndex="1"
-                    IsFocus="false" />
+                </DxChartPieSeries>
+              </DxChart>
+            </div>
+          </Template>
+        </DxGridLayoutItem>
 
-        <DevEmailEdit Caption="Email"
-                      ColumnIndex="2"
-                      RowIndex="2"
-                      IsFocus="false" />
+        <DxGridLayoutItem Column="2"
+                          Row="0">
+          <Template>
+            <div class="card">
+              <DxChart Data="BankaDurum">
+                <DxChartTitle Text="@L["BankStatusChart"]" />
+                <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
+                               Orientation="DevExpress.Blazor.Orientation.Vertical"
+                               Position="RelativePosition.Outside"
+                               VerticalAlignment="VerticalEdge.Top" />
+                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+                                  ValueField="@((FinansalDurumDto x)=> x.Tutar)">
+                  <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
+                                      Visible="true" />
 
-        <DevDateEdit Caption="Doğum tarihi"
-                     ColumnIndex="2"
-                     RowIndex="3"
-                     Value="DateTime.Now.Date" />
+                </DxChartPieSeries>
+              </DxChart>
+            </div>
+          </Template>
+        </DxGridLayoutItem>
 
-        <DevIbanNoEdit Caption="Iban NO"
-                       ColumnIndex="2"
-                       RowIndex="4"
-                       IsFocus="false" />
+        <DxGridLayoutItem Column="4"
+                          Row="0">
+          <Template>
+            <div class="card">
+              <DxChart Data="OdemeBelgeleriDagilim">
+                <DxChartTitle Text="@L["PaymentTypesDistributionChart"]" />
+                <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
+                               Orientation="DevExpress.Blazor.Orientation.Vertical"
+                               Position="RelativePosition.Outside"
+                               VerticalAlignment="VerticalEdge.Top" />
+                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+                                  ValueField="@((FinansalDurumDto x)=> x.Tutar)">
+                  <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
+                                      Visible="true" />
 
-        <DevMemoEdit Caption="Notlar"
-                     ColumnIndex="2"
-                     RowIndex="5"
-                     ColumnSpan="2"
-                     RowSpan="2" />
+                </DxChartPieSeries>
+              </DxChart>
+            </div>
+          </Template>
+        </DxGridLayoutItem>
 
-        <DevCheckEdit Caption="Durum"
-                      ColumnIndex="2"
-                      RowIndex="7"
-                      TrueCaption="Aktif"
-                      FalseCaption="Pasif" />
+        <DxGridLayoutItem Column="0"
+                          Row="2">
+          <Template>
+            <div class="card">
+              <DevPageHeader Caption="@L["LastTenTransactionsTradedInTheCashier"]"
+                             CssClass="bg-danger text-white"
+                             TextAlign="Center" />
+              <DxDataGrid @ref="KasaGrid"
+                          AllowSort="false"
+                          AllowColumnDragDrop="false"
+                          Data="KasaSonOnHareket"
+                          DataNavigationMode="DataGridNavigationMode.ShowAllDataRows"
+                          HorizontalScrollBarMode="ScrollBarMode.Visible"
+                          VerticalScrollableHeight="295">
+                <Column>
+                  <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                            DisplayFormat="@L["DateFormat"]"
+                                            Field="@nameof(FinansalHareketDto.Tarih)"
+                                            TextAlignment="DataGridTextAlign.Center"
+                                            Width="80px" />
 
-        <DevComboBoxEnumEdit TItem="BankaHesapTuru"
-                             Caption="Banka Hesap"
-                             ColumnIndex="2"
-                             RowIndex="8"
-                             DataSource="Functions.FillEnumToComboBox<BankaHesapTuru>(L)"
-                             Value="SelectedEnum"
-                             TextFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.DisplayName)"
-                             ValueFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.Value)"
-                             SelectedItemChanged="GetEnumValue">
+                  <DxDataGridColumn Caption="@L["ReceiptNo"]"
+                                    Field="@nameof(FinansalHareketDto.MakbuzNo)"
+                                    Width="120px" />
 
-        </DevComboBoxEnumEdit>
+                  <DxDataGridSpinEditColumn Caption="@L["Entered"]"
+                                            DisplayFormat="n2"
+                                            Field="@nameof(FinansalHareketDto.Borc)"
+                                            Width="100px" />
 
-        <DevLabel ColumnIndex="3" RowIndex="8" Caption="@SelectedEnum.ToString()"></DevLabel>
+                  <DxDataGridSpinEditColumn Caption="@L["Out"]"
+                                            DisplayFormat="n2"
+                                            Field="@nameof(FinansalHareketDto.Alacak)"
+                                            Width="100px" />
 
-    </GridLayoutItems>
+                  <DxDataGridColumn Caption="@L["Description"]"
+                                    Field="@nameof(FinansalHareketDto.Aciklama)"
+                                    Width="300px" />
 
-</DevGridLayout>
+                </Column>
 
+              </DxDataGrid>
+            </div>
+          </Template>
+        </DxGridLayoutItem>
+
+        <DxGridLayoutItem Column="2"
+                          Row="2">
+          <Template>
+            <div class="card">
+
+              <DevPageHeader Caption="@L["LastTenTransactionsTradedInTheBank"]"
+                             CssClass="bg-danger text-white"
+                             TextAlign="Center" />
+              <DxDataGrid @ref="BankaGrid"
+                          AllowSort="false"
+                          AllowColumnDragDrop="false"
+                          Data="BankaSonOnHareket"
+                          DataNavigationMode="DataGridNavigationMode.ShowAllDataRows"
+                          HorizontalScrollBarMode="ScrollBarMode.Visible"
+                          VerticalScrollableHeight="295">
+                <Column>
+                  <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                            DisplayFormat="@L["DateFormat"]"
+                                            Field="@nameof(FinansalHareketDto.Tarih)"
+                                            TextAlignment="DataGridTextAlign.Center"
+                                            Width="80px" />
+
+                  <DxDataGridColumn Caption="@L["ReceiptNo"]"
+                                    Field="@nameof(FinansalHareketDto.MakbuzNo)"
+                                    Width="120px" />
+
+                  <DxDataGridSpinEditColumn Caption="@L["Entered"]"
+                                            DisplayFormat="n2"
+                                            Field="@nameof(FinansalHareketDto.Borc)"
+                                            Width="100px" />
+
+                  <DxDataGridSpinEditColumn Caption="@L["Out"]"
+                                            DisplayFormat="n2"
+                                            Field="@nameof(FinansalHareketDto.Alacak)"
+                                            Width="100px" />
+
+                  <DxDataGridColumn Caption="@L["Description"]"
+                                    Field="@nameof(FinansalHareketDto.Aciklama)"
+                                    Width="300px" />
+
+                </Column>
+
+              </DxDataGrid>
+            </div>
+          </Template>
+        </DxGridLayoutItem>
+
+        <DxGridLayoutItem Column="4"
+                          Row="2">
+          <Template>
+            <div class="card">
+              <DevPageHeader Caption="@L["OverdueReceivables"]"
+                             CssClass="bg-danger text-white"
+                             TextAlign="Center" />
+              <DxDataGrid @ref="GecikenAlacaklarGrid"
+                          AllowSort="false"
+                          AllowColumnDragDrop="false"
+                          Data="GecikenAlacaklar"
+                          DataNavigationMode="DataGridNavigationMode.ShowAllDataRows"
+                          HorizontalScrollBarMode="ScrollBarMode.Visible"
+                          VerticalScrollableHeight="295">
+                <Column>
+
+
+                  <DxDataGridColumn Caption="@L["PaymentType"]"
+                                    Field="@nameof(OdemeBelgesiDto.OdemeTuruAdi)"
+                                    Width="110px" />
+
+                  <DxDataGridDateEditColumn Caption="@L["ExpireDate"]"
+                                            DisplayFormat="@L["DateFormat"]"
+                                            Field="@nameof(OdemeBelgesiDto.Vade)"
+                                            TextAlignment="DataGridTextAlign.Center"
+                                            Width="80px" />
+
+
+                  <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                            DisplayFormat="n2"
+                                            Field="@nameof(OdemeBelgesiDto.Tutar)"
+                                            Width="100px" />
+
+                  <DxDataGridColumn Caption="@L["Description"]"
+                                    Field="@nameof(FinansalHareketDto.Aciklama)"
+                                    Width="300px" />
+
+                </Column>
+
+              </DxDataGrid>
+
+            </div>
+          </Template>
+        </DxGridLayoutItem>
+
+
+      </GridLayoutItems>
+
+    </DevGridLayout>
+  </Authorized>
+
+  <NotAuthorized>
+
+  </NotAuthorized>
+</AuthorizeView>
 
 @code {
 
-    static BankaHesapTuru SelectedEnum = BankaHesapTuru.PosBlokeHesabi;
+  private DxDataGrid<FinansalHareketDto> KasaGrid;
+  private DxDataGrid<FinansalHareketDto> BankaGrid;
+  private DxDataGrid<OdemeBelgesiDto> GecikenAlacaklarGrid;
 
-    void GetEnumValue(ComboBoxEnumItem<BankaHesapTuru> hesapTuru)
+  private IList<FinansalHareketDto> KasaSonOnHareket;
+  private IList<FinansalHareketDto> BankaSonOnHareket;
+  private IList<OdemeBelgesiDto> GecikenAlacaklar;
+
+  private IList<FinansalDurumDto> KasaDurum;
+  private IList<FinansalDurumDto> BankaDurum;
+  private IList<FinansalDurumDto> OdemeBelgeleriDagilim;
+
+  private bool _isShowFirmaParametre;
+
+  protected override async Task OnParametersSetAsync()
+  {
+    if (CurrentUser.Id == null) return;
+
+    if (((SelectFirmaParametreDto)AppService.FirmaParametre).Id == Guid.Empty)
     {
-        SelectedEnum = hesapTuru.Value;
-        StateHasChanged();
+      var firmaParametre = await FirmaParametreAppService.GetAsync(CurrentUser.Id.Value);
+      if (firmaParametre != null)
+      {
+        AppService.FirmaParametre = firmaParametre;
+      }
+      else _isShowFirmaParametre = true;
     }
+  }
 }

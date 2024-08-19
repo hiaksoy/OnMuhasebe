@@ -1,4 +1,5 @@
 ﻿using BlazorUI.Core.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using OnMuhasebe.Blazor.Services.Base;
 using OnMuhasebe.CommonDtos;
 using OnMuhasebe.Localization;
@@ -25,6 +26,12 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     {
         LocalizationResource = typeof(OnMuhasebeResource);
     }
+
+    public string DefaultPolicy { get; set; }
+    public string CreatePolicy { get; set; }
+    public string UpdatePolicy { get; set; }
+    public string DeletePolicy { get; set; }
+
 
     #region Services
 
@@ -122,6 +129,10 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
 
     protected override async Task OnParametersSetAsync()
     {
+        if (DefaultPolicy != null) BaseService.IsGrantedDefault = await AuthorizationService.IsGrantedAsync(DefaultPolicy);
+        if (CreatePolicy != null) BaseService.IsGrantedCreate = await AuthorizationService.IsGrantedAsync(CreatePolicy);
+        if (UpdatePolicy != null) BaseService.IsGrantedUpdate = await AuthorizationService.IsGrantedAsync(UpdatePolicy);
+        if (DeletePolicy != null) BaseService.IsGrantedDelete = await AuthorizationService.IsGrantedAsync(DeletePolicy);
         await GetListDataSourceAsync();
         BaseService.HasChanged = StateHasChanged;
     }
@@ -131,13 +142,16 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     }
     protected virtual async Task GetListDataSourceAsync()
     {
-        BaseService.ListDataSource = (await GetListAsync(new TGetListInput
+        var listDataSource = (await GetListAsync(new TGetListInput
         {
             Durum = BaseService.IsActiveCards
         }
-        )).Items.ToList();
+        ))?.Items.ToList();
 
         BaseService.IsLoaded = true;
+
+        if(listDataSource != null)
+            BaseService.ListDataSource = listDataSource;
     }
     protected virtual async Task DeleteAsync()
     {
@@ -175,6 +189,11 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
 
     protected virtual async Task BeforeUpdateAsync()
     {
+        if (!BaseService.IsGrantedUpdate)
+        {
+            BaseService.SelectFirstDataRow = false;
+            return;
+        }
         if (BaseService.ListDataSource.Count == 0) return;
 
         BaseService.SelectFirstDataRow = false;

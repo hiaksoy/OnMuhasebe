@@ -1,6 +1,6 @@
 ﻿@page "/expensecards"
 
-
+@attribute [Authorize(OnMuhasebePermissions.Masraf.Default)]
 @inherits BaseListPage<SelectMasrafDto,ListMasrafDto,MasrafListParameterDto,CreateMasrafDto,UpdateMasrafDto,CodeParameterDto>
 @inject MasrafAppService CrudService
 @inject MasrafService Service
@@ -95,5 +95,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Masraf.Default;
+    CreatePolicy = OnMuhasebePermissions.Masraf.Create;
+    UpdatePolicy = OnMuhasebePermissions.Masraf.Update;
+    DeletePolicy = OnMuhasebePermissions.Masraf.Delete;
     }
 }

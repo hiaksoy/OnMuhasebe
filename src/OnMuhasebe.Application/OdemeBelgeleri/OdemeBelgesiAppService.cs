@@ -1,9 +1,6 @@
-﻿using OnMuhasebe.Entities.OdemeBelgeleri;
-using OnMuhasebe.MakbuzHareketler;
-using OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
+﻿namespace OnMuhasebe.OdemeBelgeleri;
 
-namespace OnMuhasebe.OdemeBelgeleri;
+[Authorize(OnMuhasebePermissions.OdemeBelgesi.Default)]
 public class OdemeBelgesiAppService : OnMuhasebeAppService, IOdemeBelgesiAppService
 {
     public OdemeBelgesiAppService(IOdemeBelgesiRepository repository)
@@ -11,7 +8,7 @@ public class OdemeBelgesiAppService : OnMuhasebeAppService, IOdemeBelgesiAppServ
         _repository = repository;
     }
     private readonly IOdemeBelgesiRepository _repository;
-    public async Task<PagedResultDto<ListOdemeBelgesiDto>> GetListAsync(OdemeBelgesiListParameterDto input)
+    public virtual async Task<PagedResultDto<ListOdemeBelgesiDto>> GetListAsync(OdemeBelgesiListParameterDto input)
     {
         IList<OdemeBelgesi> _odemeBelgeleri;
 
@@ -42,9 +39,9 @@ public class OdemeBelgesiAppService : OnMuhasebeAppService, IOdemeBelgesiAppServ
             Items = mappedEntities
         };
     }
-    public Task<SelectMakbuzHareketDto> GetAsync(Guid id) => throw new NotImplementedException();
-    public Task<SelectMakbuzHareketDto> CreateAsync(MakbuzHareketDto input) => throw new NotImplementedException();
-    public Task DeleteAsync(Guid id) => throw new NotImplementedException();
-    public Task<string> GetCodeAsync(MakbuzNoParameterDto input) => throw new NotImplementedException();
-    public Task<SelectMakbuzHareketDto> UpdateAsync(Guid id, MakbuzHareketDto input) => throw new NotImplementedException();
+    public virtual Task<SelectMakbuzHareketDto> GetAsync(Guid id) => throw new NotImplementedException();
+    public virtual Task<SelectMakbuzHareketDto> CreateAsync(MakbuzHareketDto input) => throw new NotImplementedException();
+    public virtual Task DeleteAsync(Guid id) => throw new NotImplementedException();
+    public virtual Task<string> GetCodeAsync(MakbuzNoParameterDto input) => throw new NotImplementedException();
+    public virtual Task<SelectMakbuzHareketDto> UpdateAsync(Guid id, MakbuzHareketDto input) => throw new NotImplementedException();
 }

@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Masraflar;
-using OnMuhasebe.Masraflar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Masraflar;
 
-namespace OnMuhasebe.AppServices.Masraflar;
+[Authorize(OnMuhasebePermissions.Masraf.Default)]
 public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
 {
     private readonly IMasrafRepository _masrafRepository;
@@ -16,6 +12,8 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
         _masrafManager = masrafManager;
     }
 
+
+    [Authorize(OnMuhasebePermissions.Masraf.Create)]
     public virtual async Task<SelectMasrafDto> CreateAsync(CreateMasrafDto input)
     {
         await _masrafManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id, input.OzelKod2Id);
@@ -25,6 +23,7 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Masraf.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _masrafManager.CheckDeleteAsync(id);
@@ -52,6 +51,7 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Masraf.Update)]
     public virtual async Task<SelectMasrafDto> UpdateAsync(Guid id, UpdateMasrafDto input)
     {
         var entity = await _masrafRepository.GetAsync(id, x => x.Id == id);

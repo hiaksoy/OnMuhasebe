@@ -1,5 +1,6 @@
 ﻿@page "/unitcards"
 
+@attribute [Authorize(OnMuhasebePermissions.Birim.Default)]
 @inherits BaseListPage<SelectBirimDto,ListBirimDto,BirimListParameterDto,CreateBirimDto,UpdateBirimDto,CodeParameterDto>
 @inject BirimAppService CrudService
 @inject BirimService Service
@@ -78,5 +79,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Birim.Default;
+    CreatePolicy = OnMuhasebePermissions.Birim.Create;
+    UpdatePolicy = OnMuhasebePermissions.Birim.Update;
+    DeletePolicy = OnMuhasebePermissions.Birim.Delete;
     }
 }

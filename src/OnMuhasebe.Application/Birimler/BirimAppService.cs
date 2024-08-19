@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.Birimler;
-using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Birimler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Birimler;
 
-namespace OnMuhasebe.AppServices.Birimler;
+[Authorize(OnMuhasebePermissions.Birim.Default)]
 public class BirimAppService : OnMuhasebeAppService, IBirimAppService
 {
     private readonly IBirimRepository _birimRepository;
@@ -16,6 +12,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
         _birimManager = birimManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Birim.Create)]
     public virtual async Task<SelectBirimDto> CreateAsync(CreateBirimDto input)
     {
         await _birimManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
@@ -24,6 +21,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
         return ObjectMapper.Map<Birim, SelectBirimDto>(entity);
     }
 
+    [Authorize(OnMuhasebePermissions.Birim.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _birimManager.CheckDeleteAsync(id);
@@ -50,6 +48,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
         return new PagedResultDto<ListBirimDto>(totalCount, ObjectMapper.Map<List<Birim>, List<ListBirimDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Birim.Update)]
     public virtual async Task<SelectBirimDto> UpdateAsync(Guid id, UpdateBirimDto input)
     {
         var entity = await _birimRepository.GetAsync(id, x=> x.Id == id);

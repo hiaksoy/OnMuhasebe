@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Donemler;
-using OnMuhasebe.Entities.Donemler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Donemler;
 
-namespace OnMuhasebe.AppServices.Donemler;
+[Authorize(OnMuhasebePermissions.Donem.Default)]
 public class DonemAppService : OnMuhasebeAppService, IDonemAppService
 {
     private readonly IDonemRepository _donemRepository;
@@ -17,7 +13,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
     }
 
 
-
+    [Authorize(OnMuhasebePermissions.Donem.Create)]
     public virtual async Task<SelectDonemDto> CreateAsync(CreateDonemDto input)
     {
         await _donemManager.CheckCreateAsync(input.Kod);
@@ -27,6 +23,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Donem.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _donemManager.CheckDeleteAsync(id);
@@ -52,6 +49,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
         return new PagedResultDto<ListDonemDto>(totalCount, mappedDtos);
     }
 
+    [Authorize(OnMuhasebePermissions.Donem.Update)]
     public virtual async Task<SelectDonemDto> UpdateAsync(Guid id, UpdateDonemDto input)
     {
         var entity = await _donemRepository.GetAsync(id, x => x.Id == id);

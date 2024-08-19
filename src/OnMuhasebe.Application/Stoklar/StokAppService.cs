@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Stoklar;
-using OnMuhasebe.Stoklar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Stoklar;
 
-namespace OnMuhasebe.AppServices.Stoklar;
+[Authorize(OnMuhasebePermissions.Stok.Default)]
 public class StokAppService : OnMuhasebeAppService, IStokAppService
 {
     private readonly IStokRepository _stokRepository;
@@ -15,7 +11,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
         _stokRepository = stokRepository;
         _stokManager = stokManager;
     }
-
+    [Authorize(OnMuhasebePermissions.Stok.Create)]
     public virtual async Task<SelectStokDto> CreateAsync(CreateStokDto input)
     {
         await _stokManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id, input.OzelKod2Id);
@@ -24,7 +20,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
         return ObjectMapper.Map<Stok, SelectStokDto>(entity);
 
     }
-
+    [Authorize(OnMuhasebePermissions.Stok.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _stokManager.CheckDeleteAsync(id);
@@ -50,6 +46,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
         return new PagedResultDto<ListStokDto>(totalCount, ObjectMapper.Map<List<Stok>, List<ListStokDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Stok.Update)]
     public virtual async Task<SelectStokDto> UpdateAsync(Guid id, UpdateStokDto input)
     {
         var entity = await _stokRepository.GetAsync(id,x=> x.Id == id);

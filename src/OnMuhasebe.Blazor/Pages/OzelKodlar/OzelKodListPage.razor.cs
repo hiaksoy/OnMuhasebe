@@ -8,14 +8,17 @@ public partial class OzelKodListPage
 {
     protected override async Task GetListDataSourceAsync()
     {
-        Service.ListDataSource = (await GetListAsync(new OzelKodListParameterDto
+        var listDataSource = (await GetListAsync(new OzelKodListParameterDto
         {
             KodTuru = Service.KodTuru,
             KartTuru = Service.KartTuru,
             Durum = Service.IsActiveCards
-        })).Items.ToList();
+        }))?.Items.ToList();
 
         Service.IsLoaded = true;
+
+        if (listDataSource != null)
+            Service.ListDataSource = listDataSource;
     }
 
     protected override async Task BeforeInsertAsync()

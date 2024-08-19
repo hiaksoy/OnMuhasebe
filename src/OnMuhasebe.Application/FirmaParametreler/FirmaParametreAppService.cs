@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnMuhasebe.Entities.Parametreler;
-using OnMuhasebe.Parametreler;
-using Volo.Abp.Application.Dtos;
+﻿namespace OnMuhasebe.AppServices.FirmaParametreler;
 
-
-namespace OnMuhasebe.AppServices.FirmaParametreler;
+[Authorize]
 public class FirmaParametreAppService : OnMuhasebeAppService, IFirmaParametreAppService
 {
     private readonly IFirmaParametreRepository _firmaParametreRepository;

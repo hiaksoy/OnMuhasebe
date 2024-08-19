@@ -2,6 +2,7 @@
 @using OnMuhasebe.AppServices.OzelKodlar
 @using OnMuhasebe.OzelKodlar
 
+@attribute [Authorize(OnMuhasebePermissions.OzelKod.Default)]
 @inherits BaseListPage<SelectOzelKodDto,ListOzelKodDto,OzelKodListParameterDto,CreateOzelKodDto,UpdateOzelKodDto,OzelKodCodeParameterDto>
 @inject OzelKodAppService CrudService
 @inject OzelKodService Service
@@ -61,5 +62,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.OzelKod.Default;
+    CreatePolicy = OnMuhasebePermissions.OzelKod.Create;
+    UpdatePolicy = OnMuhasebePermissions.OzelKod.Update;
+    DeletePolicy = OnMuhasebePermissions.OzelKod.Delete;
     }
 }

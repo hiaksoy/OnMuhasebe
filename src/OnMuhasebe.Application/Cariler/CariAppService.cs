@@ -1,12 +1,6 @@
-﻿using OnMuhasebe.Cariler;
-using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Cariler;
-using OnMuhasebe.Faturalar;
-using OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Cariler;
 
-namespace OnMuhasebe.AppServices.Cariler;
+[Authorize(OnMuhasebePermissions.Cari.Default)]
 public class CariAppService : OnMuhasebeAppService, ICariAppService
 {
     private readonly ICariRepository _cariRepository;
@@ -18,6 +12,7 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
         _cariManager = cariManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Cari.Create)]
     public virtual async Task<SelectCariDto> CreateAsync(CreateCariDto input)
     {
         await _cariManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
@@ -27,6 +22,7 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Cari.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _cariManager.CheckDeleteAsync(id);
@@ -59,8 +55,9 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
         }                                                                
                                                                          
         return new PagedResultDto<ListCariDto>(totalCount, mappedDtos);  
-    }                                                                    
-                                                                         
+    }
+
+    [Authorize(OnMuhasebePermissions.Cari.Delete)]
     public virtual async Task<SelectCariDto> UpdateAsync(Guid id, UpdateCariDto input)
     {                                                                    
         var entity = await _cariRepository.GetAsync(id, x => x.Id == id); 

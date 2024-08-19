@@ -1,6 +1,7 @@
 ﻿@page "/servicecards"
 @using OnMuhasebe.Hizmetler
 
+@attribute [Authorize(OnMuhasebePermissions.Hizmet.Default)]
 @inherits BaseListPage<SelectHizmetDto,ListHizmetDto,HizmetListParameterDto,CreateHizmetDto,UpdateHizmetDto,CodeParameterDto>
 @inject HizmetAppService CrudService
 @inject HizmetService Service
@@ -95,5 +96,10 @@
     {
         BaseCrudService = CrudService;
         BaseService = Service;
+
+    DefaultPolicy = OnMuhasebePermissions.Hizmet.Default;
+    CreatePolicy = OnMuhasebePermissions.Hizmet.Create;
+    UpdatePolicy = OnMuhasebePermissions.Hizmet.Update;
+    DeletePolicy = OnMuhasebePermissions.Hizmet.Delete;
     }
 }

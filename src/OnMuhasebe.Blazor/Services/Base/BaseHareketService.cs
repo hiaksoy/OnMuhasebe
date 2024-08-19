@@ -60,7 +60,10 @@ public abstract class BaseHareketService<TDataGridItem> : ICoreHareketService<TD
     public string SelectedReportName { get; set; }
     public string BaseReportFolder { get; set; }
     public string ReportFolder { get; set; }
-
+    public bool IsGrantedDefault { get; set; }
+    public bool IsGrantedCreate { get; set; }
+    public bool IsGrantedUpdate { get; set; }
+    public bool IsGrantedDelete { get; set; }
     public void BeforeShowPopupListPage(params object[] prm)
     {
         throw new NotImplementedException();

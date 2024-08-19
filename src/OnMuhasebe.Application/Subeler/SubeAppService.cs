@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.CommonDtos;
-using OnMuhasebe.Entities.Subeler;
-using OnMuhasebe.Subeler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Subeler;
 
-namespace OnMuhasebe.AppServices.Subeler;
+[Authorize(OnMuhasebePermissions.Sube.Default)]
 public class SubeAppService : OnMuhasebeAppService, ISubeAppService
 {
     private readonly ISubeRepository _subeRepository;
@@ -17,6 +13,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
         _subeManager = subeManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Create)]
     public virtual async Task<SelectSubeDto> CreateAsync(CreateSubeDto input)
     {
         await _subeManager.CheckCreateAsync(input.Kod);
@@ -26,6 +23,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _subeManager.CheckDeleteAsync(id);
@@ -50,6 +48,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
         return new PagedResultDto<ListSubeDto>(totalCount, ObjectMapper.Map<List<Sube>, List<ListSubeDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Update)]
     public virtual async Task<SelectSubeDto> UpdateAsync(Guid id, UpdateSubeDto input)
     {
         var entity = await _subeRepository.GetAsync(id, x => x.Id == id);

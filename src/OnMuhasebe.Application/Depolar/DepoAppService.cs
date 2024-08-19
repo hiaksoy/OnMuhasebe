@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.Depolar;
-using OnMuhasebe.Entities.Depolar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Depolar;
 
-
-namespace OnMuhasebe.AppServices.Depolar;
+[Authorize(OnMuhasebePermissions.Depo.Default)]
 public class DepoAppService : OnMuhasebeAppService, IDepoAppService
 {
     private readonly IDepoRepository _depoRepository;
@@ -16,6 +12,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
         _depoManager = depoManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Depo.Create)]
     public virtual async Task<SelectDepoDto> CreateAsync(CreateDepoDto input)
     {
         await _depoManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -24,7 +21,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
         return ObjectMapper.Map<Depo, SelectDepoDto>(entity);
 
     }
-
+    [Authorize(OnMuhasebePermissions.Depo.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _depoManager.CheckDeleteAsync(id);
@@ -52,6 +49,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
         return new PagedResultDto<ListDepoDto>(totalCount, mappedDtos);
     }
 
+    [Authorize(OnMuhasebePermissions.Depo.Update)]
     public virtual async Task<SelectDepoDto> UpdateAsync(Guid id, UpdateDepoDto input)
     {
         var entity = await _depoRepository.GetAsync(id, x=>x.Id == id);

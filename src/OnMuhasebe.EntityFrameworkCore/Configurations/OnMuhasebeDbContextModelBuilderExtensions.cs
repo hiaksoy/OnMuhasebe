@@ -4,6 +4,7 @@ using OnMuhasebe.Entities.OdemeBelgeleri;
 using OnMuhasebe.Faturalar;
 using OnMuhasebe.MakbuzHareketler;
 using OnMuhasebe.Makbuzlar;
+using OnMuhasebe.Raporlar;
 
 namespace OnMuhasebe.Configurations;
 public static class OnMuhasebeDbContextModelBuilderExtensions
@@ -1118,5 +1119,7 @@ public static class OnMuhasebeDbContextModelBuilderExtensions
     public static void ConfigureStoredProcedure(this ModelBuilder builder)
     {
         builder.Entity<OdemeBelgesi>();
+        builder.Entity<GirenCikanBakiye>().HasNoKey();
+        builder.Entity<OdemeBelgeleriDagilim>().HasNoKey();
     }
  }

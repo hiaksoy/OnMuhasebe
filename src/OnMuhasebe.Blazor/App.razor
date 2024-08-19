@@ -2,7 +2,8 @@
 @inject IStringLocalizer<OnMuhasebeResource> L
 @inject NavigationManager NavigationManager
 
-<CircleLoading1>
+<CircleLoading1 Caption="@L["PleaseWait"]"
+                Text="@L["Loading"]">
   <CascadingAuthenticationState>
     <Router AppAssembly="RouterOptions.Value.AppAssembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
       <Found Context="routeData">

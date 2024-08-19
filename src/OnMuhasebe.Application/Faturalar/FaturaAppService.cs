@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.Entities.Faturalar;
-using OnMuhasebe.FaturaHareketler;
-using OnMuhasebe.Faturalar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Faturalar;
 
-namespace OnMuhasebe.AppServices.Faturalar;
+[Authorize(OnMuhasebePermissions.Fatura.Default)]
 public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
 {
     private readonly IFaturaRepository _faturaRepository;
@@ -18,6 +14,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
         _faturaHareketManager = faturaHareketManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Fatura.Create)]
     public virtual async Task<SelectFaturaDto> CreateAsync(CreateFaturaDto input)
     {
         await _faturaManager.CheckCreateAsync(input.FaturaNo, input.CariId, input.OzelKod1Id, input.OzelKod2Id, input.SubeId, input.DonemId);
@@ -32,6 +29,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
         return ObjectMapper.Map<Fatura, SelectFaturaDto>(entity);
     }
 
+    [Authorize(OnMuhasebePermissions.Fatura.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         var entity = await _faturaRepository.GetAsync(id, x => x.Id == id, x => x.FaturaHareketler);
@@ -69,6 +67,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
         return new PagedResultDto<ListFaturaDto>(totalCount, ObjectMapper.Map<List<Fatura>, List<ListFaturaDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Fatura.Update)]
     public virtual async Task<SelectFaturaDto> UpdateAsync(Guid id, UpdateFaturaDto input)
     {
         var entity = await _faturaRepository.GetAsync(id, x => x.Id == id, x => x.FaturaHareketler);

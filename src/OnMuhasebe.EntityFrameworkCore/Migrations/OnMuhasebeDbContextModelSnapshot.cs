@@ -1349,6 +1349,71 @@ namespace OnMuhasebe.Migrations
                     b.ToTable("AppMasraflar", (string)null);
                 });
 
+            modelBuilder.Entity("OnMuhasebe.Entities.OdemeBelgeleri.OdemeBelgesi", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AsilBorclu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankaHesapAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("BankaHesapId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("BelgeDurumu")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("BelgeNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CekBankaAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CekBankaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CekBankaSubeAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CekBankaSubeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CekHesapNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ciranta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("KendiBelgemiz")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MakbuzId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("OdemeTuru")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("TakipNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Tutar")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Vade")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OdemeBelgesi");
+                });
+
             modelBuilder.Entity("OnMuhasebe.Entities.OzelKodlar.OzelKod", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1622,6 +1687,31 @@ namespace OnMuhasebe.Migrations
                     b.HasIndex("Kod");
 
                     b.ToTable("AppSubeler", (string)null);
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Raporlar.GirenCikanBakiye", b =>
+                {
+                    b.Property<decimal>("Bakiye")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Cikan")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Giren")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("GirenCikanBakiye");
+                });
+
+            modelBuilder.Entity("OnMuhasebe.Raporlar.OdemeBelgeleriDagilim", b =>
+                {
+                    b.Property<byte>("OdemeTuru")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("Tutar")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("OdemeBelgeleriDagilim");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

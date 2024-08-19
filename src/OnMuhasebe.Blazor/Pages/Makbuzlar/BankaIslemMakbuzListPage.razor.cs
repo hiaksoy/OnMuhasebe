@@ -5,15 +5,18 @@ public partial class BankaIslemMakbuzListPage
     public AppService? AppService { get; set; }
     protected override async Task GetListDataSourceAsync()
     {
-        Service.ListDataSource = (await GetListAsync(new MakbuzListParameterDto
+        var listDataSource = (await GetListAsync(new MakbuzListParameterDto
         {
             MakbuzTuru = MakbuzTuru.BankaIslem,
             SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
             DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId,
             Durum = Service.IsActiveCards
-        })).Items.ToList();
+        }))?.Items.ToList();
 
         Service.IsLoaded = true;
+
+        if (listDataSource != null)
+            Service.ListDataSource = listDataSource;
     }
 
     protected override async Task BeforeInsertAsync()

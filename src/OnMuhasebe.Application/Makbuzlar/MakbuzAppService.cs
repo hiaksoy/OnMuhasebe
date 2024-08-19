@@ -1,10 +1,6 @@
-﻿using OnMuhasebe.Entities.Makbuzlar;
-using OnMuhasebe.MakbuzHareketler;
-using OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.Makbuzlar;
 
-namespace OnMuhasebe.AppServices.Makbuzlar;
+[Authorize(OnMuhasebePermissions.Makbuz.Default)]
 public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
 {
     private readonly IMakbuzRepository _makbuzRepository;
@@ -18,6 +14,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
         _makbuzHareketManager = makbuzHareketManager;
     }
 
+    [Authorize(OnMuhasebePermissions.Makbuz.Create)]
     public virtual async Task<SelectMakbuzDto> CreateAsync(CreateMakbuzDto input)
     {
         await _makbuzManager.CheckCreateAsync(input.MakbuzNo, input.MakbuzTuru.Value, input.CariId, input.KasaId, input.BankaHesapId, input.OzelKod1Id, input.OzelKod2Id, input.SubeId, input.DonemId);       
@@ -33,6 +30,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
 
     }
 
+    [Authorize(OnMuhasebePermissions.Makbuz.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         var entity = await _makbuzRepository.GetAsync(id, x => x.Id == id, x => x.MakbuzHareketler);
@@ -75,6 +73,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
         return new PagedResultDto<ListMakbuzDto>(totalCount, ObjectMapper.Map<List<Makbuz>, List<ListMakbuzDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.Makbuz.Update)]
     public virtual async Task<SelectMakbuzDto> UpdateAsync(Guid id, UpdateMakbuzDto input)
     {
         var entity = await _makbuzRepository.GetAsync(id, x => x.Id == id, x => x.MakbuzHareketler);

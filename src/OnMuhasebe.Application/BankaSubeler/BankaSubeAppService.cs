@@ -1,9 +1,6 @@
-﻿using OnMuhasebe.BankaSubeler;
-using OnMuhasebe.Entities.BankaSubeler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace OnMuhasebe.AppServices.BankaSubeler;
 
-namespace OnMuhasebe.AppServices.BankaSubeler;
+[Authorize(OnMuhasebePermissions.BankaSube.Default)]
 public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
 {
     private readonly IBankaSubeRepository _bankaSubeRepository;
@@ -15,7 +12,7 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
         _bankaSubeManager = bankaSubeManager;
     }
 
-
+    [Authorize(OnMuhasebePermissions.BankaSube.Create)]
     public virtual async Task<SelectBankaSubeDto> CreateAsync(CreateBankaSubeDto input)
     {
         await _bankaSubeManager.CheckCreateAsync(input.Kod, input.BankaId, input.OzelKod1Id, input.OzelKod2Id);
@@ -24,6 +21,7 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
         return ObjectMapper.Map<BankaSube, SelectBankaSubeDto>(entity);
     }
 
+    [Authorize(OnMuhasebePermissions.BankaSube.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaSubeManager.CheckDeleteAsync(id);
@@ -53,6 +51,7 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
         return new PagedResultDto<ListBankaSubeDto>(totalCount, ObjectMapper.Map<List<BankaSube>, List<ListBankaSubeDto>>(entities));
     }
 
+    [Authorize(OnMuhasebePermissions.BankaSube.Update)]
     public virtual async Task<SelectBankaSubeDto> UpdateAsync(Guid id, UpdateBankaSubeDto input)
     {
         var entity = await _bankaSubeRepository.GetAsync(id, b => b.Id == id);

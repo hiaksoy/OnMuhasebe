@@ -15,17 +15,17 @@ public class BankaHesapHareketAppService : OnMuhasebeAppService, IBankaHesapHare
         _makbuzHareketRepository = makbuzHareketRepository;
     }
 
-    public Task<SelectMakbuzHareketDto> CreateAsync(MakbuzHareketDto input) => throw new NotImplementedException();
-
-    public Task DeleteAsync(Guid id) => throw new NotImplementedException();
-
-    public Task<SelectMakbuzHareketDto> GetAsync(Guid id) => throw new NotImplementedException();
-
-    public Task<string> GetCodeAsync(MakbuzNoParameterDto input) => throw new NotImplementedException();
-
-    public Task<SelectMakbuzHareketDto> UpdateAsync(Guid id, MakbuzHareketDto input) => throw new NotImplementedException();
-   
-    public async Task<PagedResultDto<ListOdemeBelgesiHareketDto>> GetListAsync(MakbuzHareketListParameterDto input)
+    public virtual Task<SelectMakbuzHareketDto> CreateAsync(MakbuzHareketDto input) => throw new NotImplementedException();
+           
+    public virtual Task DeleteAsync(Guid id) => throw new NotImplementedException();
+           
+    public virtual Task<SelectMakbuzHareketDto> GetAsync(Guid id) => throw new NotImplementedException();
+           
+    public virtual Task<string> GetCodeAsync(MakbuzNoParameterDto input) => throw new NotImplementedException();
+           
+    public virtual Task<SelectMakbuzHareketDto> UpdateAsync(Guid id, MakbuzHareketDto input) => throw new NotImplementedException();
+           
+    public virtual async Task<PagedResultDto<ListOdemeBelgesiHareketDto>> GetListAsync(MakbuzHareketListParameterDto input)
     {
         var hareketler = await _makbuzHareketRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount,
            x => input.OdemeTuru == OdemeTuru.Banka
