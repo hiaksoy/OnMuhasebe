@@ -1,17 +1,16 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace OnMuhasebe.Migrations
 {
-   
-    public partial class Sp_KasaDurum : Migration
+    /// <inheritdoc />
+    public partial class Sp_OdemeBelgeleriDagilim : Migration
     {
-       
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var sqlProc = @"CREATE OR ALTER PROCEDURE [dbo].[KasaDurum]
+            var sqlProc = @"CREATE OR ALTER PROCEDURE [dbo].[OdemeBelgeleriDagilim]
                     @SubeId uniqueidentifier,
                     @DonemId uniqueidentifier
                 AS
@@ -41,10 +40,10 @@ namespace OnMuhasebe.Migrations
             migrationBuilder.Sql(sqlProc);
         }
 
-       
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DROP PROC KasaDurum");
+            migrationBuilder.Sql("DROP PROC OdemeBelgeleriDagilim");
         }
     }
 }

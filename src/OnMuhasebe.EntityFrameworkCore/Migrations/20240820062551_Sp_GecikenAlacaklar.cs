@@ -1,20 +1,22 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace OnMuhasebe.Migrations
 {
-   
-    public partial class Sp_KasaDurum : Migration
+    /// <inheritdoc />
+    public partial class Sp_GecikenAlacaklar : Migration
     {
-       
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var sqlProc = @"CREATE OR ALTER PROCEDURE [dbo].[KasaDurum]
-                    @SubeId uniqueidentifier,
-                    @DonemId uniqueidentifier
-                AS
+            var sqlProc = @"CREATE OR ALTER PROCEDURE [dbo].[GecikenAlacaklar]
+
+                            @SubeId uniqueidentifier,
+                            @DonemId uniqueidentifier,
+                            @OdemeTurleri Varchar(100),
+                            @Tarih datetime
+                        AS
                 BEGIN
 
                 DECLARE
@@ -37,14 +39,13 @@ namespace OnMuhasebe.Migrations
 
                 Select @Giren As Giren, @Cikan As Cikan, @Giren-@Cikan As Bakiye
             END";
-
-            migrationBuilder.Sql(sqlProc);
+                            
         }
 
-       
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DROP PROC KasaDurum");
+            migrationBuilder.Sql("DROP PROC GecikenAlacaklar");
         }
     }
 }

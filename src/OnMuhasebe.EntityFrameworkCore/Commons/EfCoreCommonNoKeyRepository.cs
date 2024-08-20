@@ -12,7 +12,7 @@ public class EfCoreCommonNoKeyRepository<TEntity> : EfCoreRepository<OnMuhasebeD
     public async Task<TEntity> FromSqlRawSingleAsync(string sql, params object[] parameters)
         {
         var dbSet = await GetDbSetAsync();
-        return await dbSet.FromSqlRaw(sql, parameters).FirstOrDefaultAsync();
+        return (await dbSet.FromSqlRaw(sql, parameters).ToListAsync()).FirstOrDefault();
         }
 
     public async Task<IList<TEntity>> FromSqlRawAsync(string sql, params object[] parameters)

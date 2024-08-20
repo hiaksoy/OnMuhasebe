@@ -4,6 +4,7 @@
 @inject AppService AppService
 @inject ICurrentUser CurrentUser
 @inject FirmaParametreAppService FirmaParametreAppService
+@inject FinansalDurumAppService FinansalDurumAppService
 
 @inject IStringLocalizer<OnMuhasebeResource> L
 
@@ -30,19 +31,21 @@
                           Row="0">
           <Template>
             <div class="card">
-              <DxChart Data="KasaDurum">
+              <DxPieChart Data="KasaDurum">
                 <DxChartTitle Text="@L["CashStatusChart"]" />
                 <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
                                Orientation="DevExpress.Blazor.Orientation.Vertical"
                                Position="RelativePosition.Outside"
                                VerticalAlignment="VerticalEdge.Top" />
-                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+
+                <DxPieChartSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
                                   ValueField="@((FinansalDurumDto x)=> x.Tutar)">
                   <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
                                       Visible="true" />
 
-                </DxChartPieSeries>
-              </DxChart>
+                </DxPieChartSeries>
+
+              </DxPieChart>
             </div>
           </Template>
         </DxGridLayoutItem>
@@ -51,43 +54,43 @@
                           Row="0">
           <Template>
             <div class="card">
-              <DxChart Data="BankaDurum">
+              <DxPieChart Data="BankaDurum">
                 <DxChartTitle Text="@L["BankStatusChart"]" />
                 <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
                                Orientation="DevExpress.Blazor.Orientation.Vertical"
                                Position="RelativePosition.Outside"
                                VerticalAlignment="VerticalEdge.Top" />
-                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+                <DxPieChartSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
                                   ValueField="@((FinansalDurumDto x)=> x.Tutar)">
                   <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
                                       Visible="true" />
 
-                </DxChartPieSeries>
-              </DxChart>
+                </DxPieChartSeries>
+              </DxPieChart>
             </div>
           </Template>
         </DxGridLayoutItem>
 
-        <DxGridLayoutItem Column="4"
+       @*  <DxGridLayoutItem Column="4"
                           Row="0">
           <Template>
             <div class="card">
-              <DxChart Data="OdemeBelgeleriDagilim">
+              <DxPieChart Data="OdemeBelgeleriDagilim">
                 <DxChartTitle Text="@L["PaymentTypesDistributionChart"]" />
                 <DxChartLegend HorizontalAlignment="HorizontalAlignment.Right"
                                Orientation="DevExpress.Blazor.Orientation.Vertical"
                                Position="RelativePosition.Outside"
                                VerticalAlignment="VerticalEdge.Top" />
-                <DxChartPieSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
+                <DxPieChartSeries ArgumentField="@((FinansalDurumDto x)=> x.Aciklama)"
                                   ValueField="@((FinansalDurumDto x)=> x.Tutar)">
                   <DxChartSeriesLabel ValueFormat="ChartElementFormat.Decimal(2)"
                                       Visible="true" />
 
-                </DxChartPieSeries>
-              </DxChart>
+                </DxPieChartSeries>
+              </DxPieChart>
             </div>
           </Template>
-        </DxGridLayoutItem>
+        </DxGridLayoutItem> *@
 
         <DxGridLayoutItem Column="0"
                           Row="2">
@@ -182,7 +185,7 @@
           </Template>
         </DxGridLayoutItem>
 
-        <DxGridLayoutItem Column="4"
+       @*  <DxGridLayoutItem Column="4"
                           Row="2">
           <Template>
             <div class="card">
@@ -225,7 +228,7 @@
 
             </div>
           </Template>
-        </DxGridLayoutItem>
+        </DxGridLayoutItem> *@
 
 
       </GridLayoutItems>
@@ -261,11 +264,60 @@
     if (((SelectFirmaParametreDto)AppService.FirmaParametre).Id == Guid.Empty)
     {
       var firmaParametre = await FirmaParametreAppService.GetAsync(CurrentUser.Id.Value);
+
       if (firmaParametre != null)
       {
         AppService.FirmaParametre = firmaParametre;
+        await Reports();
       }
       else _isShowFirmaParametre = true;
     }
+    else
+      await Reports();
   }
+
+  private async Task Reports()
+  {
+    KasaSonOnHareket = await FinansalDurumAppService.KasaSonOnHareketListAsync(new MakbuzHareketListParameterDto
+      {
+        SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+        DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+      });
+
+    BankaSonOnHareket = await FinansalDurumAppService.BankaSonOnHareketListAsync(new MakbuzHareketListParameterDto
+      {
+        SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+        DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+      });
+
+    KasaDurum = await FinansalDurumAppService.KasaDurumListAsync(new MakbuzHareketListParameterDto
+      {
+        SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+        DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+      });
+
+    BankaDurum = await FinansalDurumAppService.BankaDurumListAsync(new MakbuzHareketListParameterDto
+      {
+        SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+        DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+      });
+
+    // OdemeBelgeleriDagilim = await FinansalDurumAppService.OdemeBelgeleriDagilimListAsync(new MakbuzHareketListParameterDto
+    //   {
+    //     SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+    //     DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+    //   });
+
+    // GecikenAlacaklar = await FinansalDurumAppService.GecikenAlacaklarListAsync(new MakbuzHareketListParameterDto
+    //   {
+    //     SubeId = ((SelectFirmaParametreDto)AppService.FirmaParametre).SubeId,
+    //     DonemId = ((SelectFirmaParametreDto)AppService.FirmaParametre).DonemId
+    //   });
+
+
+    KasaGrid.SetDataRowSelected(KasaSonOnHareket.FirstOrDefault(), true);
+    BankaGrid.SetDataRowSelected(BankaSonOnHareket.FirstOrDefault(), true);
+    // GecikenAlacaklarGrid.SetDataRowSelected(GecikenAlacaklar.FirstOrDefault(), true);
+  }
+
 }
