@@ -59,4 +59,5 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         await _bankaRepository.UpdateAsync(mappedEntity);
         return ObjectMapper.Map<Banka, SelectBankaDto>(mappedEntity);
     }
+
 }
