@@ -42,7 +42,8 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
 
     public virtual async Task<PagedResultDto<ListBankaDto>> GetListAsync(BankaListParameterDto input)
     {
-        var entities = await _bankaRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount, b => b.Durum == input.Durum, b => b.Kod, b => b.OzelKod1 , b => b.OzelKod2);
+        var entities = await _bankaRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount, b => b.Durum == input.Durum,
+            b => b.Kod, b => b.OzelKod1 , b => b.OzelKod2);
         var totalCount = await _bankaRepository.CountAsync(b => b.Durum == input.Durum);
 
         return new PagedResultDto<ListBankaDto>(totalCount, ObjectMapper.Map<List<Banka>, List<ListBankaDto>>(entities));

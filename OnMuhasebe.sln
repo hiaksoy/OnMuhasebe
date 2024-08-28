@@ -44,6 +44,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DexexpressTestBlazor", "Dex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUI.Core", "src\BlazorUI.Core\BlazorUI.Core.csproj", "{DA7E0607-5F73-41E5-BE75-B4CBB79C5DDD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{67E3147E-943E-4809-B3CF-2CC6AB19B655}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

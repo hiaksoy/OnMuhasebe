@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿
 using Microsoft.Extensions.Localization;
 using OnMuhasebe.Localization;
 

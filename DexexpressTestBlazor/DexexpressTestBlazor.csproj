@@ -5,6 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Data\OrnekComponent.razor" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="DevExpress.Blazor" Version="23.1.5" />
   </ItemGroup>
   <ItemGroup>
@@ -12,5 +15,14 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\BlazorUI.Core\BlazorUI.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Data\OrnekComponent.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Data\OrnekComponent.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\OrnekComponent.razor" />
   </ItemGroup>
 </Project>

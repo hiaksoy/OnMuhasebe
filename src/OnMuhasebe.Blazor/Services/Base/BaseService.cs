@@ -20,7 +20,7 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     public IGuidGenerator GuidGenerator { get; set; }
     public IObjectMapper ObjectMapper { get; set; }
 
-    public ComponentBase? DataGrid { get; set; }
+    public ComponentBase DataGrid { get; set; }
     public IList<TDataGridItem>? ListDataSource { get; set; }
     public TDataGridItem? SelectedItem { get; set; }
     public IEnumerable<TDataGridItem>? SelectedItems { get; set; }
