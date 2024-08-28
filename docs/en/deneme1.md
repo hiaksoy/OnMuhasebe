@@ -1,1 +1,0 @@
-docs deneme1
